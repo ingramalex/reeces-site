@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reece's Movie Trivia! 🐒</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --banana: #FFE135;
+    --banana-dark: #F4C430;
+    --brown: #6B3A2A;
+    --brown-light: #9C6644;
+    --jungle: #2D6A4F;
+    --jungle-light: #52B788;
+    --jungle-pale: #D8F3DC;
+    --orange: #FF6B35;
+    --cream: #FFF8E7;
+    --sky: #87CEEB;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--jungle);
+    background-image:
+      radial-gradient(ellipse at 10% 20%, rgba(82,183,136,0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 80%, rgba(45,106,79,0.5) 0%, transparent 50%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== FLOATING BANANAS BG ===== */
+  .bg-bananas {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .bg-banana {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.12;
+    animation: floatBanana linear infinite;
+  }
+
+  @keyframes floatBanana {
+    0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.12; }
+    90% { opacity: 0.12; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: relative; z-index: 10;
+    text-align: center;
+    padding: 30px 20px 10px;
+  }
+
+  .header-monkey {
+    font-size: 5rem;
+    display: inline-block;
+    animation: swing 2s ease-in-out infinite;
+    transform-origin: top center;
+  }
+  @keyframes swing {
+    0%, 100% { transform: rotate(-8deg); }
+    50% { transform: rotate(8deg); }
+  }
+
+  .site-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    color: var(--banana);
+    text-shadow: 4px 4px 0px var(--brown), 6px 6px 0px rgba(0,0,0,0.2);
+    line-height: 1.1;
+    letter-spacing: 2px;
+  }
+
+  .site-subtitle {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    color: var(--jungle-pale);
+    margin-top: 6px;
+    letter-spacing: 1px;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: relative; z-index: 10;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    padding: 20px;
+    flex-wrap: wrap;
+  }
+
+  .nav-btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+    position: relative;
+    top: 0;
+  }
+
+  .nav-btn.active, .nav-btn:hover {
+    top: -3px;
+    transform: scale(1.05);
+  }
+
+  .nav-btn:active { top: 2px; transform: scale(0.97); }
+
+  .nav-trivia {
+    background: var(--banana);
+    color: var(--brown);
+    box-shadow: 0 5px 0 var(--banana-dark), 0 8px 15px rgba(0,0,0,0.3);
+  }
+  .nav-trivia.active, .nav-trivia:hover {
+    box-shadow: 0 8px 0 var(--banana-dark), 0 12px 20px rgba(0,0,0,0.3);
+  }
+
+  .nav-gallery {
+    background: var(--orange);
+    color: white;
+    box-shadow: 0 5px 0 #cc4400, 0 8px 15px rgba(0,0,0,0.3);
+  }
+  .nav-gallery.active, .nav-gallery:hover {
+    box-shadow: 0 8px 0 #cc4400, 0 12px 20px rgba(0,0,0,0.3);
+  }
+
+  .nav-upload {
+    background: var(--jungle-light);
+    color: white;
+    box-shadow: 0 5px 0 var(--jungle), 0 8px 15px rgba(0,0,0,0.3);
+  }
+  .nav-upload.active, .nav-upload:hover {
+    box-shadow: 0 8px 0 var(--jungle), 0 12px 20px rgba(0,0,0,0.3);
+  }
+
+  /* ===== SECTIONS ===== */
+  .section {
+    display: none;
+    position: relative; z-index: 10;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px 20px 60px;
+  }
+  .section.active { display: block; }
+
+  .section-card {
+    background: var(--cream);
+    border-radius: 28px;
+    padding: 36px 32px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35), 0 0 0 4px var(--banana-dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 8px;
+    background: repeating-linear-gradient(90deg, var(--banana) 0 30px, var(--orange) 30px 60px, var(--brown-light) 60px 90px);
+  }
+
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    color: var(--brown);
+    text-align: center;
+    margin-bottom: 24px;
+    padding-top: 10px;
+  }
+
+  /* ===== TRIVIA GAME ===== */
+  .score-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--jungle);
+    border-radius: 50px;
+    padding: 12px 24px;
+    margin-bottom: 24px;
+    color: white;
+  }
+
+  .score-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: var(--banana);
+  }
+
+  .score-val {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.6rem;
+    color: white;
+  }
+
+  .streak-display {
+    font-size: 1.2rem;
+    color: var(--banana);
+    font-family: 'Fredoka One', cursive;
+  }
+
+  .question-box {
+    background: white;
+    border-radius: 20px;
+    padding: 28px 24px;
+    margin-bottom: 20px;
+    border: 3px solid var(--banana-dark);
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .question-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--brown);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .question-num {
+    font-family: 'Fredoka One', cursive;
+    color: var(--jungle-light);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .answers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 500px) { .answers-grid { grid-template-columns: 1fr; } }
+
+  .answer-btn {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    padding: 16px 12px;
+    border-radius: 16px;
+    border: 3px solid var(--brown-light);
+    background: white;
+    color: var(--brown);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+    line-height: 1.4;
+    position: relative;
+    top: 0;
+  }
+
+  .answer-btn:hover:not(:disabled) {
+    background: var(--banana);
+    border-color: var(--banana-dark);
+    top: -2px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .answer-btn.correct {
+    background: #b7e4c7;
+    border-color: var(--jungle);
+    color: var(--jungle);
+  }
+  .answer-btn.wrong {
+    background: #ffb3b3;
+    border-color: #cc0000;
+    color: #800000;
+  }
+  .answer-btn:disabled { cursor: default; }
+
+  .answer-letter {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: var(--orange);
+    margin-right: 8px;
+  }
+
+  .feedback-box {
+    text-align: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    min-height: 50px;
+    margin-bottom: 12px;
+    padding: 10px;
+    border-radius: 12px;
+    transition: all 0.3s;
+  }
+  .feedback-box.correct { background: #d8f3dc; color: var(--jungle); }
+  .feedback-box.wrong { background: #ffe0e0; color: #c0392b; }
+
+  .next-btn {
+    display: block;
+    margin: 0 auto;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    padding: 14px 40px;
+    background: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #cc4400;
+    transition: all 0.15s;
+    position: relative;
+    top: 0;
+  }
+  .next-btn:hover { top: -3px; box-shadow: 0 8px 0 #cc4400; }
+  .next-btn:active { top: 3px; box-shadow: 0 2px 0 #cc4400; }
+  .next-btn:disabled { opacity: 0.4; cursor: default; top: 0; }
+
+  .loading-monkey {
+    text-align: center;
+    font-size: 3rem;
+    animation: bounce 0.6s infinite alternate;
+    padding: 20px;
+  }
+  @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-12px); } }
+
+  .loading-text {
+    text-align: center;
+    font-family: 'Fredoka One', cursive;
+    color: var(--brown-light);
+    font-size: 1.1rem;
+  }
+
+  .end-screen {
+    text-align: center;
+    padding: 20px;
+  }
+  .end-emoji { font-size: 5rem; display: block; margin-bottom: 16px; }
+  .end-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.2rem;
+    color: var(--brown);
+    margin-bottom: 10px;
+  }
+  .end-score {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: var(--jungle);
+    margin-bottom: 24px;
+  }
+
+  .play-again-btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    padding: 16px 48px;
+    background: var(--banana);
+    color: var(--brown);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 0 var(--banana-dark);
+    transition: all 0.15s;
+    position: relative; top: 0;
+  }
+  .play-again-btn:hover { top: -3px; box-shadow: 0 9px 0 var(--banana-dark); }
+
+  /* ===== GALLERY ===== */
+  .gallery-empty {
+    text-align: center;
+    padding: 40px;
+    color: var(--brown-light);
+  }
+  .gallery-empty-icon { font-size: 4rem; margin-bottom: 12px; }
+  .gallery-empty-text { font-family: 'Fredoka One', cursive; font-size: 1.2rem; }
+
+  .media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  .media-item {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 3px solid var(--banana-dark);
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: all 0.2s;
+    position: relative;
+    cursor: pointer;
+  }
+  .media-item:hover {
+    transform: scale(1.04) rotate(1deg);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    z-index: 2;
+  }
+
+  .media-item img {
+    width: 100%; height: 160px;
+    object-fit: cover;
+    display: block;
+  }
+  .media-item video {
+    width: 100%; height: 160px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .media-caption {
+    padding: 8px 10px;
+    font-weight: 700;
+    color: var(--brown);
+    font-size: 0.85rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .media-delete {
+    position: absolute;
+    top: 6px; right: 6px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    border-radius: 50%;
+    width: 28px; height: 28px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: #c0392b;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .media-item:hover .media-delete { opacity: 1; }
+
+  /* ===== UPLOAD ===== */
+  .upload-zone {
+    border: 4px dashed var(--brown-light);
+    border-radius: 24px;
+    padding: 50px 30px;
+    text-align: center;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 24px;
+  }
+  .upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--orange);
+    background: #fff8f5;
+    transform: scale(1.01);
+  }
+  .upload-zone-icon { font-size: 4rem; margin-bottom: 12px; }
+  .upload-zone-text {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    color: var(--brown);
+    margin-bottom: 8px;
+  }
+  .upload-zone-sub { color: var(--brown-light); font-size: 0.9rem; }
+
+  #fileInput { display: none; }
+
+  .upload-btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    padding: 14px 36px;
+    background: var(--jungle-light);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 var(--jungle);
+    transition: all 0.15s;
+    margin-top: 16px;
+    position: relative; top: 0;
+  }
+  .upload-btn:hover { top: -3px; box-shadow: 0 8px 0 var(--jungle); }
+
+  .upload-preview-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .upload-preview-item {
+    background: white;
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 2px solid var(--jungle-pale);
+    font-weight: 700;
+    color: var(--brown);
+  }
+  .preview-thumb {
+    width: 52px; height: 52px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid var(--banana-dark);
+    flex-shrink: 0;
+  }
+  .preview-info { flex: 1; min-width: 0; }
+  .preview-name { font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .preview-size { font-size: 0.8rem; color: var(--brown-light); font-weight: 400; }
+  .preview-remove {
+    background: #ffe0e0;
+    border: none;
+    border-radius: 50%;
+    width: 30px; height: 30px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #c0392b;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .add-to-gallery-btn {
+    display: block;
+    margin: 20px auto 0;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    padding: 15px 44px;
+    background: var(--banana);
+    color: var(--brown);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 6px 0 var(--banana-dark);
+    transition: all 0.15s;
+    position: relative; top: 0;
+  }
+  .add-to-gallery-btn:hover { top: -3px; box-shadow: 0 9px 0 var(--banana-dark); }
+  .add-to-gallery-btn:disabled { opacity: 0.4; cursor: default; top: 0; }
+
+  /* ===== LIGHTBOX ===== */
+  .lightbox {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img, .lightbox video {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 16px;
+    border: 4px solid var(--banana);
+    object-fit: contain;
+  }
+  .lightbox-close {
+    position: fixed;
+    top: 20px; right: 24px;
+    font-size: 2.5rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Fredoka One', cursive;
+    line-height: 1;
+    z-index: 1001;
+  }
+
+  /* ===== VINE DECORATION ===== */
+  .vine {
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 4px;
+    margin: 8px 0;
+    opacity: 0.6;
+    color: var(--jungle-light);
+  }
+
+  .monkey-row {
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 4px 0;
+    animation: waddle 3s ease-in-out infinite;
+  }
+  @keyframes waddle {
+    0%, 100% { letter-spacing: 8px; }
+    50% { letter-spacing: 14px; }
+  }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed;
+    bottom: 30px; left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--jungle);
+    color: var(--banana);
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    padding: 14px 28px;
+    border-radius: 50px;
+    z-index: 999;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ===== DIFFICULTY SELECTOR ===== */
+  .difficulty-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .diff-btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    padding: 8px 22px;
+    border-radius: 50px;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .diff-btn.easy { background: #d8f3dc; color: var(--jungle); border-color: var(--jungle-light); }
+  .diff-btn.medium { background: #fff3b0; color: #856404; border-color: #ffc107; }
+  .diff-btn.hard { background: #ffe0e0; color: #7d1a1a; border-color: #ef5350; }
+  .diff-btn.active { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+  /* ===== PIN LOCK ===== */
+  .pin-lock {
+    text-align: center;
+    padding: 10px 0 20px;
+  }
+  .pin-lock-icon {
+    font-size: 4rem;
+    display: inline-block;
+    animation: wobble 3s ease-in-out infinite;
+  }
+  @keyframes wobble {
+    0%,100% { transform: rotate(-6deg); }
+    50% { transform: rotate(6deg); }
+  }
+  .pin-lock-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.8rem;
+    color: var(--brown);
+    margin: 10px 0 4px;
+  }
+  .pin-lock-sub {
+    color: var(--brown-light);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+  .pin-dots {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .pin-dot {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    border: 3px solid var(--brown-light);
+    background: white;
+    transition: all 0.2s;
+  }
+  .pin-dot.filled {
+    background: var(--jungle);
+    border-color: var(--jungle);
+    transform: scale(1.15);
+  }
+  .pin-dot.error {
+    background: #ef5350;
+    border-color: #c62828;
+    animation: shake 0.4s ease;
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+  }
+  .pin-keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 72px);
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .pin-key {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 3px solid var(--banana-dark);
+    background: white;
+    color: var(--brown);
+    cursor: pointer;
+    transition: all 0.12s;
+    position: relative; top: 0;
+    box-shadow: 0 4px 0 var(--banana-dark);
+  }
+  .pin-key:hover { background: var(--banana); top: -2px; box-shadow: 0 6px 0 var(--banana-dark); }
+  .pin-key:active { top: 3px; box-shadow: 0 1px 0 var(--banana-dark); }
+  .pin-key.clear { background: #ffe0e0; border-color: #ef9a9a; color: #c62828; box-shadow: 0 4px 0 #ef9a9a; }
+  .pin-key.clear:hover { background: #ffcdd2; top: -2px; box-shadow: 0 6px 0 #ef9a9a; }
+  .pin-error-msg {
+    font-family: 'Fredoka One', cursive;
+    color: #c62828;
+    font-size: 1rem;
+    min-height: 24px;
+    margin-top: 4px;
+  }
+  .pin-hint {
+    margin-top: 14px;
+    font-size: 0.8rem;
+    color: var(--brown-light);
+  }
+  .upload-content { display: none; }
+  .upload-content.unlocked { display: block; }
+  .lock-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    background: var(--jungle);
+    color: var(--banana);
+    font-family: 'Fredoka One', cursive;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating background bananas -->
+<div class="bg-bananas" id="bgBananas"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <div id="lightboxContent"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Header -->
+<header>
+  <div class="header-monkey">🐒</div>
+  <div class="site-title">Reece's Movie Trivia!</div>
+  <div class="site-subtitle">🍌 Swing into the movies! 🍌</div>
+  <div class="monkey-row">🐵 🍌 🐒 🍌 🐵</div>
+</header>
+
+<!-- Navigation -->
+<nav>
+  <button class="nav-btn nav-trivia active" onclick="showSection('trivia', this)">🎬 Movie Trivia</button>
+  <button class="nav-btn nav-gallery" onclick="showSection('gallery', this)">🖼️ My Gallery</button>
+  <button class="nav-btn nav-upload" onclick="showSection('upload', this)">📤 Upload</button>
+</nav>
+
+<!-- ============ TRIVIA SECTION ============ -->
+<section id="trivia" class="section active">
+  <div class="section-card">
+    <div class="section-title">🎬 Movie Trivia Challenge! 🐒</div>
+
+    <div class="difficulty-row">
+      <button class="diff-btn easy active" onclick="setDifficulty('easy', this)">🌱 Easy</button>
+      <button class="diff-btn medium" onclick="setDifficulty('medium', this)">🔥 Medium</button>
+      <button class="diff-btn hard" onclick="setDifficulty('hard', this)">💀 Hard</button>
+    </div>
+
+    <div class="score-bar">
+      <div>
+        <div class="score-label">Score</div>
+        <div class="score-val" id="scoreVal">0</div>
+      </div>
+      <div style="text-align:center">
+        <div class="streak-display" id="streakDisplay">🔥 0 streak</div>
+      </div>
+      <div style="text-align:right">
+        <div class="score-label">Question</div>
+        <div class="score-val" id="qNumDisplay">1 / 10</div>
+      </div>
+    </div>
+
+    <div id="triviaContent">
+      <div class="loading-monkey">🐒</div>
+      <div class="loading-text">Loading your first question...</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY SECTION ============ -->
+<section id="gallery" class="section">
+  <div class="section-card">
+    <div class="section-title">🖼️ Reece's Gallery 📸</div>
+    <div id="galleryGrid">
+      <div class="gallery-empty">
+        <div class="gallery-empty-icon">🐵</div>
+        <div class="gallery-empty-text">No pictures yet! Upload some to get started 🍌</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UPLOAD SECTION ============ -->
+<section id="upload" class="section">
+  <div class="section-card">
+    <div class="section-title">📤 Upload Pictures & Videos <span class="lock-badge" id="lockBadge">🔒 Locked</span></div>
+
+    <!-- PIN LOCK SCREEN -->
+    <div class="pin-lock" id="pinLock">
+      <div class="pin-lock-icon">🙈</div>
+      <div class="pin-lock-title">Reece's Secret Zone!</div>
+      <div class="pin-lock-sub">Enter your 4-digit PIN to upload photos &amp; videos</div>
+      <div class="pin-dots">
+        <div class="pin-dot" id="dot0"></div>
+        <div class="pin-dot" id="dot1"></div>
+        <div class="pin-dot" id="dot2"></div>
+        <div class="pin-dot" id="dot3"></div>
+      </div>
+      <div class="pin-keypad">
+        <button class="pin-key" onclick="pinPress('1')">1</button>
+        <button class="pin-key" onclick="pinPress('2')">2</button>
+        <button class="pin-key" onclick="pinPress('3')">3</button>
+        <button class="pin-key" onclick="pinPress('4')">4</button>
+        <button class="pin-key" onclick="pinPress('5')">5</button>
+        <button class="pin-key" onclick="pinPress('6')">6</button>
+        <button class="pin-key" onclick="pinPress('7')">7</button>
+        <button class="pin-key" onclick="pinPress('8')">8</button>
+        <button class="pin-key" onclick="pinPress('9')">9</button>
+        <button class="pin-key clear" onclick="pinClear()" style="grid-column:1">&#9003;</button>
+        <button class="pin-key" onclick="pinPress('0')">0</button>
+        <div></div>
+      </div>
+      <div class="pin-error-msg" id="pinError"></div>
+      <div class="pin-hint">Ask a grown-up if you forgot your PIN 🐒</div>
+    </div>
+
+    <!-- UPLOAD CONTENT (hidden until PIN unlocked) -->
+    <div class="upload-content" id="uploadContent">
+      <div style="text-align:center;margin-bottom:18px;">
+        <button onclick="lockUpload()" style="font-family:'Fredoka One',cursive;font-size:0.95rem;padding:7px 20px;background:#ffe0e0;border:2px solid #ef9a9a;border-radius:30px;color:#c62828;cursor:pointer;">🔒 Lock Upload</button>
+      </div>
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+        <div class="upload-zone-icon">🐵📸</div>
+        <div class="upload-zone-text">Click or Drag &amp; Drop here!</div>
+        <div class="upload-zone-sub">Photos and videos welcome 🍌</div>
+      </div>
+      <input type="file" id="fileInput" multiple accept="image/*,video/*" onchange="handleFileSelect(event)">
+      <div class="upload-preview-list" id="previewList"></div>
+      <button class="add-to-gallery-btn" id="addGalleryBtn" disabled onclick="addToGallery()">
+        🍌 Add to Gallery!
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<div class="vine">🌿🌿🌿🌿🌿🌿🌿🌿</div>
+
+<script>
+// ========== PIN LOCK ==========
+// Change this to whatever 4-digit PIN you want Reece to use!
+const CORRECT_PIN = '0826';
+
+let pinEntry = '';
+let pinLocked = true;
+
+function pinPress(digit) {
+  if (pinEntry.length >= 4) return;
+  pinEntry += digit;
+  updatePinDots();
+  if (pinEntry.length === 4) {
+    setTimeout(checkPin, 150);
+  }
+}
+
+function pinClear() {
+  if (pinEntry.length === 0) return;
+  pinEntry = pinEntry.slice(0, -1);
+  updatePinDots();
+  document.getElementById('pinError').textContent = '';
+}
+
+function updatePinDots() {
+  for (let i = 0; i < 4; i++) {
+    const dot = document.getElementById('dot' + i);
+    dot.classList.toggle('filled', i < pinEntry.length);
+    dot.classList.remove('error');
+  }
+}
+
+function checkPin() {
+  if (pinEntry === CORRECT_PIN) {
+    unlockUpload();
+  } else {
+    for (let i = 0; i < 4; i++) {
+      document.getElementById('dot' + i).classList.add('error');
+    }
+    document.getElementById('pinError').textContent = '❌ Wrong PIN! Try again 🐒';
+    setTimeout(() => {
+      pinEntry = '';
+      updatePinDots();
+      document.getElementById('pinError').textContent = '';
+    }, 900);
+  }
+}
+
+function unlockUpload() {
+  pinLocked = false;
+  document.getElementById('pinLock').style.display = 'none';
+  document.getElementById('uploadContent').classList.add('unlocked');
+  document.getElementById('lockBadge').textContent = '🔓 Unlocked';
+  document.getElementById('lockBadge').style.background = 'var(--jungle-light)';
+  showToast('🙉 Welcome, Reece! Upload away!');
+}
+
+function lockUpload() {
+  pinLocked = true;
+  pinEntry = '';
+  document.getElementById('pinLock').style.display = '';
+  document.getElementById('uploadContent').classList.remove('unlocked');
+  document.getElementById('lockBadge').textContent = '🔒 Locked';
+  document.getElementById('lockBadge').style.background = '';
+  updatePinDots();
+}
+
+// ========== FLOATING BANANAS ==========
+const bgBananas = document.getElementById('bgBananas');
+const bananaEmojis = ['🍌','🐒','🐵','🍌','🍌'];
+for(let i=0; i<18; i++){
+  const b = document.createElement('div');
+  b.className = 'bg-banana';
+  b.textContent = bananaEmojis[Math.floor(Math.random()*bananaEmojis.length)];
+  b.style.left = Math.random()*100 + '%';
+  b.style.fontSize = (1.2 + Math.random()*2) + 'rem';
+  b.style.animationDuration = (8 + Math.random()*15) + 's';
+  b.style.animationDelay = -(Math.random()*20) + 's';
+  bgBananas.appendChild(b);
+}
+
+// ========== NAV ==========
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(btn) btn.classList.add('active');
+}
+
+// ========== TOAST ==========
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ========== TRIVIA GAME ==========
+let score = 0;
+let streak = 0;
+let questionNum = 0;
+const totalQuestions = 10;
+let answered = false;
+let currentDifficulty = 'easy';
+let askedQuestions = [];
+
+const triviaBank = {
+  easy: [
+    { q: "What movie features a clownfish dad looking for his son?", a: "Finding Nemo", choices: ["Finding Nemo","Shark Tale","The Little Mermaid","Moana"] },
+    { q: "In which movie does a toy cowboy named Woody come to life?", a: "Toy Story", choices: ["Toy Story","Shrek","Ratatouille","Cars"] },
+    { q: "Who is the main character in 'The Lion King'?", a: "Simba", choices: ["Simba","Mufasa","Timon","Scar"] },
+    { q: "What color is the Grinch?", a: "Green", choices: ["Green","Red","Blue","Yellow"] },
+    { q: "In 'Frozen', what is Elsa's sister's name?", a: "Anna", choices: ["Anna","Elsa","Olaf","Kristoff"] },
+    { q: "What is the name of the ogre in the 'Shrek' movies?", a: "Shrek", choices: ["Shrek","Donkey","Puss","Fiona"] },
+    { q: "In which movie does a rat control a chef?", a: "Ratatouille", choices: ["Ratatouille","Bee Movie","Antz","A Bug's Life"] },
+    { q: "What is the name of the superhero family in 'The Incredibles'?", a: "The Parr family", choices: ["The Parr family","The Supers","The Heroes","The Powers"] },
+    { q: "Which princess kisses a frog in a Disney movie?", a: "Tiana", choices: ["Tiana","Cinderella","Belle","Jasmine"] },
+    { q: "What is the robot's name in the movie 'WALL-E'?", a: "WALL-E", choices: ["WALL-E","EVE","R2-D2","Optimus"] },
+    { q: "In 'Cars', what is the name of the red race car?", a: "Lightning McQueen", choices: ["Lightning McQueen","Mater","Chick Hicks","The King"] },
+    { q: "What type of animal is Dumbo?", a: "Elephant", choices: ["Elephant","Mouse","Rabbit","Bear"] },
+  ],
+  medium: [
+    { q: "What is the name of the villain in 'The Little Mermaid'?", a: "Ursula", choices: ["Ursula","Gaston","Maleficent","Cruella"] },
+    { q: "In 'Up', what is the name of Carl's childhood hero?", a: "Charles Muntz", choices: ["Charles Muntz","Russell","Dug","Kevin"] },
+    { q: "What color is Sulley in 'Monsters, Inc.'?", a: "Blue and purple", choices: ["Blue and purple","Green","Orange","Red"] },
+    { q: "Which movie features the song 'Let It Go'?", a: "Frozen", choices: ["Frozen","Tangled","Brave","Moana"] },
+    { q: "What is the name of Buzz Lightyear's home planet?", a: "Planet Zurg (Star Command)", choices: ["Star Command","Planet Zurg (Star Command)","Andromeda","Galaxy Z"] },
+    { q: "Who voiced Donkey in the Shrek movies?", a: "Eddie Murphy", choices: ["Eddie Murphy","Mike Myers","Antonio Banderas","Will Smith"] },
+    { q: "What year was the first 'Toy Story' movie released?", a: "1995", choices: ["1995","1998","2001","1993"] },
+    { q: "In 'Coco', which country is the story set in?", a: "Mexico", choices: ["Mexico","Brazil","Spain","Argentina"] },
+    { q: "What is the name of Harry Potter's owl?", a: "Hedwig", choices: ["Hedwig","Fawkes","Errol","Pigwidgeon"] },
+    { q: "In 'Jumanji', what board game causes the chaos?", a: "Jumanji", choices: ["Jumanji","Zathura","Chess","Monopoly"] },
+    { q: "What is the name of the bear in 'Paddington'?", a: "Paddington", choices: ["Paddington","Baloo","Rupert","Yogi"] },
+    { q: "In 'Home Alone', what city is Kevin left behind in?", a: "Chicago", choices: ["Chicago","New York","Los Angeles","Boston"] },
+  ],
+  hard: [
+    { q: "In 'Moana', what is the name of the demigod who stole the heart of Te Fiti?", a: "Maui", choices: ["Maui","Tamatoa","Te Ka","Tui"] },
+    { q: "What is the name of the studio that made 'Spirited Away'?", a: "Studio Ghibli", choices: ["Studio Ghibli","Pixar","DreamWorks","Illumination"] },
+    { q: "In 'Inside Out', which emotion was NOT one of the main five?", a: "Love", choices: ["Love","Disgust","Surprise","Sadness"] },
+    { q: "What fictional kingdom is 'Frozen' set in?", a: "Arendelle", choices: ["Arendelle","Corona","Dunbroch","Motunui"] },
+    { q: "In 'Zootopia', what is the name of the fox character?", a: "Nick Wilde", choices: ["Nick Wilde","Jack Savage","Duke Weaselton","Finnick"] },
+    { q: "What are the Minions' favorite food in 'Despicable Me'?", a: "Bananas", choices: ["Bananas","Apples","Pizza","Candy"] },
+    { q: "In 'The Jungle Book', what is the name of the bear?", a: "Baloo", choices: ["Baloo","Bagheera","Shere Khan","King Louie"] },
+    { q: "Which character says 'To infinity and beyond!'?", a: "Buzz Lightyear", choices: ["Buzz Lightyear","Woody","Emperor Zurg","Rex"] },
+    { q: "In 'Encanto', the magic of the Madrigal family lives in what object?", a: "A candle", choices: ["A candle","A door","A house","A ring"] },
+    { q: "What is the name of the dragon in 'How to Train Your Dragon'?", a: "Toothless", choices: ["Toothless","Hookfang","Stormfly","Meatlug"] },
+    { q: "Which Pixar movie features the phrase 'Adventure is out there!'?", a: "Up", choices: ["Up","Brave","Turning Red","Luca"] },
+    { q: "In 'Kung Fu Panda', what is the name of the villain?", a: "Tai Lung", choices: ["Tai Lung","Kai","Lord Shen","Scorpion"] },
+  ]
+};
+
+let shuffledQuestions = [];
+
+function setDifficulty(diff, btn) {
+  currentDifficulty = diff;
+  document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  restartGame();
+}
+
+function restartGame() {
+  score = 0;
+  streak = 0;
+  questionNum = 0;
+  askedQuestions = [];
+  shuffledQuestions = [...triviaBank[currentDifficulty]].sort(() => Math.random()-0.5);
+  updateScoreBar();
+  loadQuestion();
+}
+
+function updateScoreBar() {
+  document.getElementById('scoreVal').textContent = score;
+  document.getElementById('streakDisplay').textContent = `🔥 ${streak} streak`;
+  document.getElementById('qNumDisplay').textContent = `${questionNum} / ${totalQuestions}`;
+}
+
+function loadQuestion() {
+  if(questionNum >= totalQuestions) { showEndScreen(); return; }
+
+  answered = false;
+  const container = document.getElementById('triviaContent');
+  
+  const q = shuffledQuestions[questionNum % shuffledQuestions.length];
+  const shuffledChoices = [...q.choices].sort(() => Math.random()-0.5);
+  const letters = ['A','B','C','D'];
+
+  container.innerHTML = `
+    <div class="question-num">Question ${questionNum+1} of ${totalQuestions}</div>
+    <div class="question-box">
+      <div class="question-text">${q.q}</div>
+    </div>
+    <div class="answers-grid">
+      ${shuffledChoices.map((c,i) => `
+        <button class="answer-btn" onclick="checkAnswer(this, '${c.replace(/'/g,"\\'")}', '${q.a.replace(/'/g,"\\'")}')">
+          <span class="answer-letter">${letters[i]}.</span>${c}
+        </button>
+      `).join('')}
+    </div>
+    <div class="feedback-box" id="feedbackBox"></div>
+    <button class="next-btn" id="nextBtn" disabled onclick="nextQuestion()">Next Question 🍌</button>
+  `;
+}
+
+function checkAnswer(btn, chosen, correct) {
+  if(answered) return;
+  answered = true;
+  questionNum++;
+
+  const allBtns = document.querySelectorAll('.answer-btn');
+  allBtns.forEach(b => { b.disabled = true; });
+
+  const feedbackBox = document.getElementById('feedbackBox');
+  const nextBtn = document.getElementById('nextBtn');
+
+  if(chosen === correct) {
+    btn.classList.add('correct');
+    score += currentDifficulty === 'easy' ? 10 : currentDifficulty === 'medium' ? 15 : 20;
+    streak++;
+    feedbackBox.textContent = streak >= 3 ? `🔥 ${streak} in a row! You're on fire!` : '✅ Correct! Awesome job!';
+    feedbackBox.className = 'feedback-box correct';
+    showToast(streak >= 3 ? `🔥 ${streak} streak! Amazing!` : '✅ Correct!');
+  } else {
+    btn.classList.add('wrong');
+    allBtns.forEach(b => {
+      if(b.textContent.trim().slice(2) === correct || b.textContent.includes(correct)) {
+        b.classList.add('correct');
+      }
+    });
+    streak = 0;
+    feedbackBox.textContent = `❌ Not quite! The answer was: ${correct}`;
+    feedbackBox.className = 'feedback-box wrong';
+  }
+
+  updateScoreBar();
+  nextBtn.disabled = false;
+}
+
+function nextQuestion() {
+  if(questionNum >= totalQuestions) { showEndScreen(); return; }
+  loadQuestion();
+}
+
+function showEndScreen() {
+  const pct = Math.round((score / (totalQuestions * (currentDifficulty==='easy'?10:currentDifficulty==='medium'?15:20))) * 100);
+  let emoji = '🐒';
+  let msg = 'Nice try, keep playing!';
+  if(pct >= 90) { emoji = '🏆'; msg = 'YOU ARE A MOVIE GENIUS!'; }
+  else if(pct >= 70) { emoji = '🌟'; msg = 'Amazing job, superstar!'; }
+  else if(pct >= 50) { emoji = '🍌'; msg = 'Great effort! Try again?'; }
+
+  document.getElementById('triviaContent').innerHTML = `
+    <div class="end-screen">
+      <span class="end-emoji">${emoji}</span>
+      <div class="end-title">${msg}</div>
+      <div class="end-score">You scored ${score} points! (${pct}%)</div>
+      <button class="play-again-btn" onclick="restartGame()">🐵 Play Again!</button>
+    </div>
+  `;
+}
+
+// Start the game
+restartGame();
+
+// ========== GALLERY ==========
+let galleryItems = JSON.parse(localStorage.getItem('reeceGallery') || '[]');
+
+function renderGallery() {
+  const grid = document.getElementById('galleryGrid');
+  if(galleryItems.length === 0) {
+    grid.innerHTML = `
+      <div class="gallery-empty">
+        <div class="gallery-empty-icon">🐵</div>
+        <div class="gallery-empty-text">No pictures yet! Upload some to get started 🍌</div>
+      </div>`;
+    return;
+  }
+  grid.className = 'media-grid';
+  grid.innerHTML = galleryItems.map((item, i) => {
+    const isVideo = item.type && item.type.startsWith('video');
+    return `
+      <div class="media-item" onclick="openLightbox(${i})">
+        ${isVideo
+          ? `<video src="${item.src}" muted playsinline></video>`
+          : `<img src="${item.src}" alt="${item.name}" loading="lazy">`}
+        <div class="media-caption">${item.name}</div>
+        <button class="media-delete" onclick="deleteItem(event,${i})">🗑️</button>
+      </div>`;
+  }).join('');
+}
+
+function deleteItem(e, i) {
+  e.stopPropagation();
+  galleryItems.splice(i, 1);
+  saveGallery();
+  renderGallery();
+  showToast('🗑️ Deleted!');
+}
+
+function saveGallery() {
+  try { localStorage.setItem('reeceGallery', JSON.stringify(galleryItems)); } catch(e) {}
+}
+
+function openLightbox(i) {
+  const item = galleryItems[i];
+  const isVideo = item.type && item.type.startsWith('video');
+  document.getElementById('lightboxContent').innerHTML = isVideo
+    ? `<video src="${item.src}" controls autoplay style="max-width:90vw;max-height:85vh;border-radius:16px;border:4px solid var(--banana);"></video>`
+    : `<img src="${item.src}" style="max-width:90vw;max-height:85vh;border-radius:16px;border:4px solid var(--banana);">`;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lightboxContent').innerHTML = '';
+}
+
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if(e.target === this) closeLightbox();
+});
+
+renderGallery();
+
+// ========== UPLOAD ==========
+let pendingFiles = [];
+
+const uploadZone = document.getElementById('uploadZone');
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+uploadZone.addEventListener('drop', e => {
+  e.preventDefault();
+  uploadZone.classList.remove('drag-over');
+  handleFiles([...e.dataTransfer.files]);
+});
+
+function handleFileSelect(e) { handleFiles([...e.target.files]); }
+
+function handleFiles(files) {
+  files.forEach(file => {
+    if(!file.type.startsWith('image/') && !file.type.startsWith('video/')) return;
+    if(pendingFiles.find(f => f.name === file.name && f.size === file.size)) return;
+    pendingFiles.push(file);
+    renderPreview(file);
+  });
+  document.getElementById('addGalleryBtn').disabled = pendingFiles.length === 0;
+}
+
+function renderPreview(file) {
+  const list = document.getElementById('previewList');
+  const item = document.createElement('div');
+  item.className = 'upload-preview-item';
+  item.dataset.fileName = file.name;
+
+  const isVideo = file.type.startsWith('video/');
+  const thumbEl = isVideo
+    ? `<div style="width:52px;height:52px;border-radius:10px;background:#e0e0e0;display:flex;align-items:center;justify-content:center;font-size:1.8rem;border:2px solid var(--banana-dark)">🎬</div>`
+    : `<img class="preview-thumb" src="" alt="">`;
+
+  item.innerHTML = `
+    ${thumbEl}
+    <div class="preview-info">
+      <div class="preview-name">${file.name}</div>
+      <div class="preview-size">${(file.size/1024/1024).toFixed(2)} MB</div>
+    </div>
+    <button class="preview-remove" onclick="removePending('${file.name}',${file.size})">✕</button>
+  `;
+
+  if(!isVideo) {
+    const reader = new FileReader();
+    reader.onload = e => { item.querySelector('.preview-thumb').src = e.target.result; };
+    reader.readAsDataURL(file);
+  }
+
+  list.appendChild(item);
+}
+
+function removePending(name, size) {
+  pendingFiles = pendingFiles.filter(f => !(f.name===name && f.size==size));
+  const item = document.querySelector(`[data-file-name="${name}"]`);
+  if(item) item.remove();
+  document.getElementById('addGalleryBtn').disabled = pendingFiles.length === 0;
+}
+
+function addToGallery() {
+  if(pendingFiles.length === 0) return;
+  let loaded = 0;
+  pendingFiles.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      galleryItems.unshift({ src: e.target.result, name: file.name, type: file.type });
+      loaded++;
+      if(loaded === pendingFiles.length) {
+        saveGallery();
+        renderGallery();
+        pendingFiles = [];
+        document.getElementById('previewList').innerHTML = '';
+        document.getElementById('addGalleryBtn').disabled = true;
+        document.getElementById('fileInput').value = '';
+        showToast(`🍌 Added ${loaded} item${loaded>1?'s':''} to your gallery!`);
+        showSection('gallery', document.querySelector('.nav-gallery'));
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+}
+</script>
+</body>
+</html>

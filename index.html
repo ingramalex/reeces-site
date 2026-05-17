@@ -378,63 +378,6 @@
     -webkit-text-stroke: 1.5px black;
   }
 
-  .speak-btn {
-    font-family: 'Fredoka One', cursive;
-    font-size: 1rem;
-    padding: 8px 20px;
-    background: #FFE135;
-    color: #333;
-    border: 3px solid #222;
-    border-radius: 50px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: all 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 4px 0 #c2a000;
-    position: relative;
-    top: 0;
-  }
-  .speak-btn:hover { top: -2px; box-shadow: 0 6px 0 #c2a000; background: #fff0a0; }
-  .speak-btn:active { top: 2px; box-shadow: 0 2px 0 #c2a000; }
-  .speak-btn.talking {
-    background: #00BFFF;
-    color: white;
-    border-color: #0080aa;
-    box-shadow: 0 4px 0 #0060aa;
-    animation: pulse-talk 0.5s ease-in-out infinite alternate;
-  }
-  @keyframes pulse-talk {
-    from { transform: scale(1); }
-    to { transform: scale(1.05); }
-  }
-
-  .read-meme-btn {
-    font-family: 'Fredoka One', cursive;
-    font-size: 0.95rem;
-    padding: 7px 18px;
-    background: #00BFFF;
-    color: white;
-    border: 3px solid #0080aa;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 3px 0 #0060aa;
-    position: relative;
-    top: 0;
-  }
-  .read-meme-btn:hover { top: -2px; box-shadow: 0 5px 0 #0060aa; }
-  .read-meme-btn.talking {
-    background: #ff6b35;
-    border-color: #cc4400;
-    box-shadow: 0 3px 0 #cc4400;
-    animation: pulse-talk 0.5s ease-in-out infinite alternate;
-  }
-
   /* ===== SECTIONS ===== */
   .section {
     display: none;
@@ -1170,11 +1113,10 @@
 
     <!-- NARRATOR 1 -->
     <div class="sponge-narrator">
-      <div class="sponge-face" id="sponge0">🧽</div>
+      <div class="sponge-face">🧽</div>
       <div class="sponge-speech">
         "Ahh, a beautiful day in Bikini Bottom! Are you ready, kids? Because I, SpongeBob SquarePants, present to you... THE FUNNIEST MEMES IN THE OCEAN!"
         <span>— SpongeBob, probably</span>
-        <br><button class="speak-btn" onclick="spongeSpeak(this, `Ahh, a beautiful day in Bikini Bottom! Are you ready, kids? Because I, SpongeBob SquarePants, present to you... THE FUNNIEST MEMES IN THE OCEAN!`, 'sponge0')">🔊 Hear SpongeBob!</button>
       </div>
     </div>
 
@@ -1194,17 +1136,15 @@
       <div class="laugh-meter">
         <div class="laugh-label">Laugh Level:</div>
         <div class="laugh-emojis">😂😂😂😂😂</div>
-        <button class="read-meme-btn" onclick="readMeme(this, 'Every kid ever. Nope: Going to sleep on time. Yes please: Watching one more episode at midnight!')">🧽 Read It!</button>
       </div>
     </div>
 
     <!-- NARRATOR 2 -->
     <div class="sponge-narrator">
-      <div class="sponge-face" id="sponge1">🧽</div>
+      <div class="sponge-face">🧽</div>
       <div class="sponge-speech">
         "Ha ha ha ha ha HA! Oh boy, that one got me! Patrick thought that was about him. Anyway, here's another one — this one is REALLY good. I made it up myself!"
         <span>— SpongeBob, giggling underwater</span>
-        <br><button class="speak-btn" onclick="spongeSpeak(this, `Ha ha ha ha ha HA! Oh boy, that one got me! Patrick thought that was about him. Anyway, here's another one — this one is REALLY good. I made it up myself!`, 'sponge1')">🔊 Hear SpongeBob!</button>
       </div>
     </div>
 
@@ -1224,17 +1164,15 @@
       <div class="laugh-meter">
         <div class="laugh-label">Laugh Level:</div>
         <div class="laugh-emojis">😂😂😂</div>
-        <button class="read-meme-btn" onclick="readMeme(this, 'Before versus after homework. Before finishing homework: crying face. After finishing homework: cool sunglasses face!')">🧽 Read It!</button>
       </div>
     </div>
 
     <!-- NARRATOR 3 -->
     <div class="sponge-narrator">
-      <div class="sponge-face" id="sponge2">🧽</div>
+      <div class="sponge-face">🧽</div>
       <div class="sponge-speech">
         "Three hours later... Oh! You're still here? BARNACLES, so am I! Get ready for the BIG BRAIN meme. Squidward doesn't understand it, but that's okay."
         <span>— SpongeBob, three hours later</span>
-        <br><button class="speak-btn" onclick="spongeSpeak(this, `Three hours later... Oh! You're still here? BARNACLES, so am I! Get ready for the BIG BRAIN meme. Squidward doesn't understand it, but that's okay.`, 'sponge2')">🔊 Hear SpongeBob!</button>
       </div>
     </div>
 
@@ -1262,17 +1200,15 @@
       <div class="laugh-meter">
         <div class="laugh-label">Laugh Level:</div>
         <div class="laugh-emojis">😂😂😂😂😂🤣</div>
-        <button class="read-meme-btn" onclick="readMeme(this, 'Big brain moves! Small brain: Eating your veggies. Medium brain: Saying you already brushed your teeth. Big brain: Hiding the evidence of the snack you weren\\'t supposed to eat. GALAXY BRAIN: Convincing mom it IS a vegetable because ketchup is made of tomatoes!')">🧽 Read It!</button>
       </div>
     </div>
 
     <!-- NARRATOR 4 -->
     <div class="sponge-narrator">
-      <div class="sponge-face" id="sponge3">🧽</div>
+      <div class="sponge-face">🧽</div>
       <div class="sponge-speech">
         "IMAGINATION! ✨ Can you feel it? That was the best meme I've ever seen and I've seen AT LEAST four. Next up — this one is about Mondays. Patrick says every day is Monday. Patrick is not very smart."
         <span>— SpongeBob, using his imagination box</span>
-        <br><button class="speak-btn" onclick="spongeSpeak(this, `IMAGINATION! Can you feel it? That was the best meme I've ever seen and I've seen AT LEAST four. Next up — this one is about Mondays. Patrick says every day is Monday. Patrick is not very smart.`, 'sponge3')">🔊 Hear SpongeBob!</button>
       </div>
     </div>
 
@@ -1289,17 +1225,15 @@
       <div class="laugh-meter">
         <div class="laugh-label">Laugh Level:</div>
         <div class="laugh-emojis">😂😂😂😂</div>
-        <button class="read-meme-btn" onclick="readMeme(this, 'Me on Sunday night. Realizing Monday is tomorrow... NOOOOOOOOOO!')">🧽 Read It!</button>
       </div>
     </div>
 
     <!-- NARRATOR 5 -->
     <div class="sponge-narrator">
-      <div class="sponge-face" id="sponge4">🧽</div>
+      <div class="sponge-face">🧽</div>
       <div class="sponge-speech">
         "I'm ready! I'm ready! I'm ready! Okay okay here is the LAST meme and it is the FUNNIEST one. Gary meowed when he saw it. That's the highest honor."
         <span>— SpongeBob, doing his best karate moves</span>
-        <br><button class="speak-btn" onclick="spongeSpeak(this, `I'm ready! I'm ready! I'm ready! Okay okay here is the LAST meme and it is the FUNNIEST one. Gary meowed when he saw it. That's the highest honor.`, 'sponge4')">🔊 Hear SpongeBob!</button>
       </div>
     </div>
 
@@ -1319,17 +1253,15 @@
       <div class="laugh-meter">
         <div class="laugh-label">Laugh Level:</div>
         <div class="laugh-emojis">😂😂😂😂😂🤣🤣</div>
-        <button class="read-meme-btn" onclick="readMeme(this, 'My brain at ten PM. Nope: Remembering I have to sleep. Yes: Remembering every embarrassing thing I have ever done since age three!')">🧽 Read It!</button>
       </div>
     </div>
 
     <!-- FINAL NARRATOR -->
     <div class="sponge-narrator" style="border-color: var(--banana); box-shadow: 0 4px 16px rgba(255,225,53,0.4);">
-      <div class="sponge-face" id="sponge5">🧽</div>
+      <div class="sponge-face">🧽</div>
       <div class="sponge-speech" style="color: var(--banana);">
         "And THAT is the end of today's Meme Zone! I hope you laughed so hard that milk came out of your nose — even if you weren't drinking milk! See you next time, and remember: IMAGINATION!"
         <span>— SpongeBob SquarePants, signing off from Bikini Bottom</span>
-        <br><button class="speak-btn" onclick="spongeSpeak(this, `And THAT is the end of today's Meme Zone! I hope you laughed so hard that milk came out of your nose — even if you weren't drinking milk! See you next time, and remember: IMAGINATION!`, 'sponge5')">🔊 Hear SpongeBob!</button>
       </div>
     </div>
 
@@ -1600,90 +1532,6 @@ function showEndScreen() {
 
 // Start the game
 restartGame();
-
-// ========== SPONGEBOB VOICE ==========
-let currentUtterance = null;
-let activeSpeakBtn = null;
-let activeSponge = null;
-let spongeBobVoice = null;
-
-function pickSpongeBobVoice(voices) {
-  // Priority: fun/cartoon-sounding voices first
-  const priority = ['Bubbles','Wobble','Junior','Albert','Ralph','Bahh','Trinoids','Zarvox','Organ','Cellos','Cello','Good News','Bad News'];
-  for (const name of priority) {
-    const v = voices.find(v => v.name === name);
-    if (v) return v;
-  }
-  // Fall back to child-like or en-US
-  return voices.find(v => /child|kid|junior/i.test(v.name))
-    || voices.find(v => v.lang === 'en-US' && v.name.includes('Google'))
-    || voices.find(v => v.lang === 'en-US')
-    || voices[0];
-}
-
-function loadVoices() {
-  const voices = window.speechSynthesis.getVoices();
-  if (voices.length) spongeBobVoice = pickSpongeBobVoice(voices);
-}
-window.speechSynthesis.onvoiceschanged = loadVoices;
-loadVoices();
-
-function addSpongeBobFlair(text) {
-  // Sprinkle in SpongeBob-isms to make the voice more fun
-  return 'heh heh heh! ' + text.replace(/!+/g, '! heh!').replace(/\?/g, '? Oh boy!');
-}
-
-function stopSpeaking() {
-  window.speechSynthesis.cancel();
-  if (activeSpeakBtn) {
-    activeSpeakBtn.textContent = activeSpeakBtn.dataset.label || '🔊 Hear SpongeBob!';
-    activeSpeakBtn.classList.remove('talking');
-  }
-  if (activeSponge) document.getElementById(activeSponge).textContent = '🧽';
-  currentUtterance = null; activeSpeakBtn = null; activeSponge = null;
-}
-
-function speakAs(btn, rawText, spongeId, label) {
-  if (!window.speechSynthesis) { alert("Your browser doesn't support speech!"); return; }
-  if (!spongeBobVoice) loadVoices();
-
-  if (window.speechSynthesis.speaking) {
-    const wasSameBtn = activeSpeakBtn === btn;
-    stopSpeaking();
-    if (wasSameBtn) return;
-  }
-
-  const text = addSpongeBobFlair(rawText);
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.pitch = 2.0;   // max pitch — as squeaky as possible!
-  utterance.rate  = 1.2;
-  utterance.volume = 1;
-  if (spongeBobVoice) utterance.voice = spongeBobVoice;
-
-  btn.dataset.label = label;
-  btn.textContent = '🗣️ SpongeBob is talking...';
-  btn.classList.add('talking');
-
-  const spongeEl = spongeId ? document.getElementById(spongeId) : null;
-  if (spongeEl) spongeEl.textContent = '🗣️';
-
-  currentUtterance = utterance;
-  activeSpeakBtn = btn;
-  activeSponge = spongeId;
-
-  utterance.onend = () => stopSpeaking();
-  utterance.onerror = () => stopSpeaking();
-
-  window.speechSynthesis.speak(utterance);
-}
-
-function spongeSpeak(btn, text, spongeId) {
-  speakAs(btn, text, spongeId, '🔊 Hear SpongeBob!');
-}
-
-function readMeme(btn, text) {
-  speakAs(btn, text, null, '🧽 Read It!');
-}
 
 // ========== GALLERY ==========
 let galleryItems = JSON.parse(localStorage.getItem('reeceGallery') || '[]');

@@ -143,6 +143,241 @@
     box-shadow: 0 8px 0 var(--jungle), 0 12px 20px rgba(0,0,0,0.3);
   }
 
+  .nav-memes {
+    background: #00BFFF;
+    color: white;
+    box-shadow: 0 5px 0 #0080aa, 0 8px 15px rgba(0,0,0,0.3);
+  }
+  .nav-memes.active, .nav-memes:hover {
+    box-shadow: 0 8px 0 #0080aa, 0 12px 20px rgba(0,0,0,0.3);
+  }
+
+  /* ===== SPONGEBOB MEMES ===== */
+  .sponge-narrator {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 18px;
+    padding: 18px 24px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 3px solid #00BFFF;
+    box-shadow: 0 4px 16px rgba(0,191,255,0.3);
+  }
+  .sponge-face {
+    font-size: 3.2rem;
+    flex-shrink: 0;
+    animation: spongebob-talk 1.2s ease-in-out infinite;
+  }
+  @keyframes spongebob-talk {
+    0%,100% { transform: scale(1) rotate(-3deg); }
+    50% { transform: scale(1.1) rotate(3deg); }
+  }
+  .sponge-speech {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: #00BFFF;
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .sponge-speech span {
+    display: block;
+    font-size: 0.85rem;
+    color: #aaa;
+    font-style: normal;
+    margin-top: 2px;
+  }
+
+  .meme-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 4px solid #222;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    margin-bottom: 32px;
+    transition: transform 0.2s;
+  }
+  .meme-card:hover { transform: scale(1.02) rotate(-0.5deg); }
+
+  .meme-top-text, .meme-bottom-text {
+    font-family: Impact, 'Arial Black', sans-serif;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    text-align: center;
+    padding: 14px 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    -webkit-text-stroke: 2px black;
+    text-stroke: 2px black;
+    line-height: 1.2;
+  }
+  .meme-top-text {
+    background: #111;
+  }
+  .meme-bottom-text {
+    background: #111;
+  }
+
+  .meme-scene {
+    background: #fff;
+    padding: 0;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #87CEEB 0%, #87CEEB 60%, #c2a05a 60%, #c2a05a 100%);
+  }
+
+  .meme-scene-emoji {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 20px;
+    z-index: 1;
+  }
+
+  .meme-emoji-big { font-size: 5rem; }
+  .meme-emoji-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: #333;
+    background: rgba(255,255,255,0.85);
+    padding: 4px 14px;
+    border-radius: 20px;
+    border: 2px solid #333;
+    text-align: center;
+  }
+
+  .meme-scene-two {
+    display: flex;
+    width: 100%;
+  }
+  .meme-half {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 10px;
+    gap: 8px;
+    border-right: 4px solid #222;
+  }
+  .meme-half:last-child { border-right: none; }
+  .meme-half-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: white;
+    background: #222;
+    padding: 4px 14px;
+    border-radius: 20px;
+    text-align: center;
+  }
+
+  .meme-drake {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .drake-row {
+    display: flex;
+    align-items: center;
+    min-height: 120px;
+    border-bottom: 4px solid #222;
+    background: #f5e6c8;
+  }
+  .drake-row:last-child { border-bottom: none; }
+  .drake-emoji {
+    font-size: 4rem;
+    padding: 16px;
+    min-width: 90px;
+    text-align: center;
+    background: #ffe135;
+    border-right: 4px solid #222;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .drake-text {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    color: #333;
+    padding: 16px 20px;
+    line-height: 1.4;
+  }
+
+  .meme-expanding-brain {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  .brain-row {
+    display: flex;
+    align-items: center;
+    min-height: 90px;
+    border-bottom: 3px solid #222;
+  }
+  .brain-row:last-child { border-bottom: none; }
+  .brain-glow {
+    font-size: 2.8rem;
+    padding: 12px 16px;
+    min-width: 80px;
+    text-align: center;
+    border-right: 3px solid #222;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .brain-row:nth-child(1) { background: #e8f5e9; }
+  .brain-row:nth-child(2) { background: #fff9c4; }
+  .brain-row:nth-child(3) { background: #ffe0b2; }
+  .brain-row:nth-child(4) { background: #e8d5ff; }
+  .brain-text {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: #333;
+    padding: 12px 18px;
+    line-height: 1.4;
+  }
+
+  .laugh-meter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: #f9f9f9;
+    border-top: 3px solid #222;
+  }
+  .laugh-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    color: #555;
+    white-space: nowrap;
+  }
+  .laugh-emojis { font-size: 1.2rem; letter-spacing: 2px; }
+
+  .memes-header-strip {
+    background: linear-gradient(135deg, #FFE135, #00BFFF);
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    margin-bottom: 24px;
+    border: 4px solid #222;
+  }
+  .memes-header-strip-text {
+    font-family: Impact, 'Arial Black', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: white;
+    -webkit-text-stroke: 1.5px black;
+  }
+
   /* ===== SECTIONS ===== */
   .section {
     display: none;
@@ -765,6 +1000,7 @@
   <button class="nav-btn nav-trivia active" onclick="showSection('trivia', this)">🎬 Movie Trivia</button>
   <button class="nav-btn nav-gallery" onclick="showSection('gallery', this)">🖼️ My Gallery</button>
   <button class="nav-btn nav-upload" onclick="showSection('upload', this)">📤 Upload</button>
+  <button class="nav-btn nav-memes" onclick="showSection('memes', this)">🧽 SpongeBob Memes</button>
 </nav>
 
 <!-- ============ TRIVIA SECTION ============ -->
@@ -861,6 +1097,172 @@
       <button class="add-to-gallery-btn" id="addGalleryBtn" disabled onclick="addToGallery()">
         🍌 Add to Gallery!
       </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ SPONGEBOB MEMES SECTION ============ -->
+<section id="memes" class="section">
+  <div class="section-card">
+    <div class="section-title">🧽 SpongeBob's Meme Zone! 🌊</div>
+
+    <div class="memes-header-strip">
+      <div class="memes-header-strip-text">🧽 Narrated by SpongeBob SquarePants 🧽</div>
+    </div>
+
+    <!-- NARRATOR 1 -->
+    <div class="sponge-narrator">
+      <div class="sponge-face">🧽</div>
+      <div class="sponge-speech">
+        "Ahh, a beautiful day in Bikini Bottom! Are you ready, kids? Because I, SpongeBob SquarePants, present to you... THE FUNNIEST MEMES IN THE OCEAN!"
+        <span>— SpongeBob, probably</span>
+      </div>
+    </div>
+
+    <!-- MEME 1: Drake -->
+    <div class="meme-card">
+      <div class="meme-top-text">Every kid ever</div>
+      <div class="meme-drake">
+        <div class="drake-row">
+          <div class="drake-emoji">🙅</div>
+          <div class="drake-text">Going to sleep on time</div>
+        </div>
+        <div class="drake-row">
+          <div class="drake-emoji">🙆</div>
+          <div class="drake-text">Watching one more episode at midnight</div>
+        </div>
+      </div>
+      <div class="laugh-meter">
+        <div class="laugh-label">Laugh Level:</div>
+        <div class="laugh-emojis">😂😂😂😂😂</div>
+      </div>
+    </div>
+
+    <!-- NARRATOR 2 -->
+    <div class="sponge-narrator">
+      <div class="sponge-face">🧽</div>
+      <div class="sponge-speech">
+        "Ha ha ha ha ha HA! Oh boy, that one got me! Patrick thought that was about him. Anyway, here's another one — this one is REALLY good. I made it up myself!"
+        <span>— SpongeBob, giggling underwater</span>
+      </div>
+    </div>
+
+    <!-- MEME 2: Two Panels -->
+    <div class="meme-card">
+      <div class="meme-top-text">Before vs After homework</div>
+      <div class="meme-scene meme-scene-two" style="min-height:200px; background: white;">
+        <div class="meme-half" style="background:#ffe0e0;">
+          <div class="meme-emoji-big">😭</div>
+          <div class="meme-half-label">Before finishing homework</div>
+        </div>
+        <div class="meme-half" style="background:#d8f3dc;">
+          <div class="meme-emoji-big">😎</div>
+          <div class="meme-half-label">After finishing homework</div>
+        </div>
+      </div>
+      <div class="laugh-meter">
+        <div class="laugh-label">Laugh Level:</div>
+        <div class="laugh-emojis">😂😂😂</div>
+      </div>
+    </div>
+
+    <!-- NARRATOR 3 -->
+    <div class="sponge-narrator">
+      <div class="sponge-face">🧽</div>
+      <div class="sponge-speech">
+        "Three hours later... Oh! You're still here? BARNACLES, so am I! Get ready for the BIG BRAIN meme. Squidward doesn't understand it, but that's okay."
+        <span>— SpongeBob, three hours later</span>
+      </div>
+    </div>
+
+    <!-- MEME 3: Expanding Brain -->
+    <div class="meme-card">
+      <div class="meme-top-text">Big brain moves</div>
+      <div class="meme-expanding-brain">
+        <div class="brain-row">
+          <div class="brain-glow">🧠</div>
+          <div class="brain-text">Eating your veggies</div>
+        </div>
+        <div class="brain-row">
+          <div class="brain-glow">🧠✨</div>
+          <div class="brain-text">Saying you already brushed your teeth</div>
+        </div>
+        <div class="brain-row">
+          <div class="brain-glow">🌟🧠🌟</div>
+          <div class="brain-text">Hiding the evidence of the snack you weren't supposed to eat</div>
+        </div>
+        <div class="brain-row">
+          <div class="brain-glow">🌌🧠🌌</div>
+          <div class="brain-text">Convincing mom it IS a vegetable because ketchup is made of tomatoes</div>
+        </div>
+      </div>
+      <div class="laugh-meter">
+        <div class="laugh-label">Laugh Level:</div>
+        <div class="laugh-emojis">😂😂😂😂😂🤣</div>
+      </div>
+    </div>
+
+    <!-- NARRATOR 4 -->
+    <div class="sponge-narrator">
+      <div class="sponge-face">🧽</div>
+      <div class="sponge-speech">
+        "IMAGINATION! ✨ Can you feel it? That was the best meme I've ever seen and I've seen AT LEAST four. Next up — this one is about Mondays. Patrick says every day is Monday. Patrick is not very smart."
+        <span>— SpongeBob, using his imagination box</span>
+      </div>
+    </div>
+
+    <!-- MEME 4: Monday -->
+    <div class="meme-card">
+      <div class="meme-top-text">Me on Sunday night</div>
+      <div class="meme-scene" style="background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%); min-height: 200px;">
+        <div class="meme-scene-emoji">
+          <div class="meme-emoji-big">😱</div>
+          <div class="meme-emoji-label" style="background:rgba(255,255,255,0.9);">Realizing Monday is tomorrow</div>
+        </div>
+      </div>
+      <div class="meme-bottom-text">NOOOOOOOOOOO</div>
+      <div class="laugh-meter">
+        <div class="laugh-label">Laugh Level:</div>
+        <div class="laugh-emojis">😂😂😂😂</div>
+      </div>
+    </div>
+
+    <!-- NARRATOR 5 -->
+    <div class="sponge-narrator">
+      <div class="sponge-face">🧽</div>
+      <div class="sponge-speech">
+        "I'm ready! I'm ready! I'm ready! Okay okay here is the LAST meme and it is the FUNNIEST one. Gary meowed when he saw it. That's the highest honor."
+        <span>— SpongeBob, doing his best karate moves</span>
+      </div>
+    </div>
+
+    <!-- MEME 5: Drake -->
+    <div class="meme-card">
+      <div class="meme-top-text">My brain at 10pm</div>
+      <div class="meme-drake">
+        <div class="drake-row">
+          <div class="drake-emoji">🙅</div>
+          <div class="drake-text">Remembering I have to sleep</div>
+        </div>
+        <div class="drake-row">
+          <div class="drake-emoji">🙆</div>
+          <div class="drake-text">Remembering every embarrassing thing I've ever done since age 3</div>
+        </div>
+      </div>
+      <div class="laugh-meter">
+        <div class="laugh-label">Laugh Level:</div>
+        <div class="laugh-emojis">😂😂😂😂😂🤣🤣</div>
+      </div>
+    </div>
+
+    <!-- FINAL NARRATOR -->
+    <div class="sponge-narrator" style="border-color: var(--banana); box-shadow: 0 4px 16px rgba(255,225,53,0.4);">
+      <div class="sponge-face">🧽</div>
+      <div class="sponge-speech" style="color: var(--banana);">
+        "And THAT is the end of today's Meme Zone! I hope you laughed so hard that milk came out of your nose — even if you weren't drinking milk! See you next time, and remember: IMAGINATION! ✨✨✨"
+        <span>— SpongeBob SquarePants, signing off from Bikini Bottom</span>
+      </div>
     </div>
 
   </div>

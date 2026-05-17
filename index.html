@@ -1605,84 +1605,85 @@ restartGame();
 let currentUtterance = null;
 let activeSpeakBtn = null;
 let activeSponge = null;
+let spongeBobVoice = null;
 
-function spongeSpeak(btn, text, spongeId) {
-  if (!window.speechSynthesis) { alert('Your browser doesn\'t support speech!'); return; }
-
-  if (currentUtterance && window.speechSynthesis.speaking) {
-    window.speechSynthesis.cancel();
-    if (activeSpeakBtn) { activeSpeakBtn.textContent = '🔊 Hear SpongeBob!'; activeSpeakBtn.classList.remove('talking'); }
-    if (activeSponge) document.getElementById(activeSponge).textContent = '🧽';
-    if (activeSpeakBtn === btn) { currentUtterance = null; activeSpeakBtn = null; activeSponge = null; return; }
+function pickSpongeBobVoice(voices) {
+  // Priority: fun/cartoon-sounding voices first
+  const priority = ['Bubbles','Wobble','Junior','Albert','Ralph','Bahh','Trinoids','Zarvox','Organ','Cellos','Cello','Good News','Bad News'];
+  for (const name of priority) {
+    const v = voices.find(v => v.name === name);
+    if (v) return v;
   }
-
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.pitch = 1.6;
-  utterance.rate = 1.15;
-  utterance.volume = 1;
-
-  const voices = window.speechSynthesis.getVoices();
-  const preferred = voices.find(v => v.name.includes('Google') && v.lang === 'en-US')
+  // Fall back to child-like or en-US
+  return voices.find(v => /child|kid|junior/i.test(v.name))
+    || voices.find(v => v.lang === 'en-US' && v.name.includes('Google'))
     || voices.find(v => v.lang === 'en-US')
     || voices[0];
-  if (preferred) utterance.voice = preferred;
+}
 
-  btn.textContent = '🔊 SpongeBob is talking...';
+function loadVoices() {
+  const voices = window.speechSynthesis.getVoices();
+  if (voices.length) spongeBobVoice = pickSpongeBobVoice(voices);
+}
+window.speechSynthesis.onvoiceschanged = loadVoices;
+loadVoices();
+
+function addSpongeBobFlair(text) {
+  // Sprinkle in SpongeBob-isms to make the voice more fun
+  return 'heh heh heh! ' + text.replace(/!+/g, '! heh!').replace(/\?/g, '? Oh boy!');
+}
+
+function stopSpeaking() {
+  window.speechSynthesis.cancel();
+  if (activeSpeakBtn) {
+    activeSpeakBtn.textContent = activeSpeakBtn.dataset.label || '🔊 Hear SpongeBob!';
+    activeSpeakBtn.classList.remove('talking');
+  }
+  if (activeSponge) document.getElementById(activeSponge).textContent = '🧽';
+  currentUtterance = null; activeSpeakBtn = null; activeSponge = null;
+}
+
+function speakAs(btn, rawText, spongeId, label) {
+  if (!window.speechSynthesis) { alert("Your browser doesn't support speech!"); return; }
+  if (!spongeBobVoice) loadVoices();
+
+  if (window.speechSynthesis.speaking) {
+    const wasSameBtn = activeSpeakBtn === btn;
+    stopSpeaking();
+    if (wasSameBtn) return;
+  }
+
+  const text = addSpongeBobFlair(rawText);
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.pitch = 2.0;   // max pitch — as squeaky as possible!
+  utterance.rate  = 1.2;
+  utterance.volume = 1;
+  if (spongeBobVoice) utterance.voice = spongeBobVoice;
+
+  btn.dataset.label = label;
+  btn.textContent = '🗣️ SpongeBob is talking...';
   btn.classList.add('talking');
-  const spongeEl = document.getElementById(spongeId);
+
+  const spongeEl = spongeId ? document.getElementById(spongeId) : null;
   if (spongeEl) spongeEl.textContent = '🗣️';
 
   currentUtterance = utterance;
   activeSpeakBtn = btn;
   activeSponge = spongeId;
 
-  utterance.onend = () => {
-    btn.textContent = '🔊 Hear SpongeBob!';
-    btn.classList.remove('talking');
-    if (spongeEl) spongeEl.textContent = '🧽';
-    currentUtterance = null; activeSpeakBtn = null; activeSponge = null;
-  };
+  utterance.onend = () => stopSpeaking();
+  utterance.onerror = () => stopSpeaking();
 
   window.speechSynthesis.speak(utterance);
+}
+
+function spongeSpeak(btn, text, spongeId) {
+  speakAs(btn, text, spongeId, '🔊 Hear SpongeBob!');
 }
 
 function readMeme(btn, text) {
-  if (!window.speechSynthesis) { alert('Your browser doesn\'t support speech!'); return; }
-
-  if (currentUtterance && window.speechSynthesis.speaking) {
-    window.speechSynthesis.cancel();
-    if (activeSpeakBtn) { activeSpeakBtn.textContent = '🔊 Hear SpongeBob!'; activeSpeakBtn.classList.remove('talking'); }
-    if (activeSponge) document.getElementById(activeSponge).textContent = '🧽';
-    if (activeSpeakBtn === btn) { currentUtterance = null; activeSpeakBtn = null; activeSponge = null; return; }
-  }
-
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.pitch = 1.6;
-  utterance.rate = 1.1;
-  utterance.volume = 1;
-
-  const voices = window.speechSynthesis.getVoices();
-  const preferred = voices.find(v => v.name.includes('Google') && v.lang === 'en-US')
-    || voices.find(v => v.lang === 'en-US')
-    || voices[0];
-  if (preferred) utterance.voice = preferred;
-
-  btn.textContent = '🧽 Reading...';
-  btn.classList.add('talking');
-  currentUtterance = utterance;
-  activeSpeakBtn = btn;
-  activeSponge = null;
-
-  utterance.onend = () => {
-    btn.textContent = '🧽 Read It!';
-    btn.classList.remove('talking');
-    currentUtterance = null; activeSpeakBtn = null;
-  };
-
-  window.speechSynthesis.speak(utterance);
+  speakAs(btn, text, null, '🧽 Read It!');
 }
-
-window.speechSynthesis.onvoiceschanged = () => {};
 
 // ========== GALLERY ==========
 let galleryItems = JSON.parse(localStorage.getItem('reeceGallery') || '[]');

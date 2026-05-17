@@ -152,6 +152,224 @@
     box-shadow: 0 8px 0 #0080aa, 0 12px 20px rgba(0,0,0,0.3);
   }
 
+  .nav-anime {
+    background: linear-gradient(135deg, #e63946, #f77f00);
+    color: white;
+    box-shadow: 0 5px 0 #a00, 0 8px 15px rgba(0,0,0,0.3);
+  }
+  .nav-anime.active, .nav-anime:hover {
+    box-shadow: 0 8px 0 #a00, 0 12px 20px rgba(0,0,0,0.3);
+  }
+
+  /* ===== ANIME PAGE ===== */
+  .anime-tabs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .anime-tab {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    padding: 10px 24px;
+    border-radius: 50px;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    top: 0;
+  }
+  .anime-tab:hover { top: -2px; }
+  .anime-tab.active { transform: scale(1.08); top: -3px; }
+
+  .anime-tab.opm  { background: #fff0f0; color: #b00; border-color: #e63946; box-shadow: 0 4px 0 #a00; }
+  .anime-tab.dbz  { background: #fff8e0; color: #a05000; border-color: #f77f00; box-shadow: 0 4px 0 #c56000; }
+  .anime-tab.nrt  { background: #fff4e0; color: #7d3c00; border-color: #f4a261; box-shadow: 0 4px 0 #c07030; }
+  .anime-tab.pkm  { background: #fffde0; color: #7a6000; border-color: #ffd60a; box-shadow: 0 4px 0 #b09000; }
+
+  .anime-tab.opm.active  { background: #e63946; color: white; }
+  .anime-tab.dbz.active  { background: #f77f00; color: white; }
+  .anime-tab.nrt.active  { background: #f4a261; color: white; }
+  .anime-tab.pkm.active  { background: #ffd60a; color: #333; }
+
+  .anime-show { display: none; }
+  .anime-show.active { display: block; }
+
+  .anime-hero-banner {
+    border-radius: 20px;
+    padding: 28px 24px;
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .anime-hero-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 2px,
+      transparent 2px,
+      transparent 12px
+    );
+  }
+  .anime-big-emoji {
+    font-size: 5rem;
+    display: block;
+    margin-bottom: 10px;
+    animation: hero-float 3s ease-in-out infinite;
+  }
+  @keyframes hero-float {
+    0%,100% { transform: translateY(0) rotate(-3deg); }
+    50%      { transform: translateY(-12px) rotate(3deg); }
+  }
+  .anime-show-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: white;
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.4);
+    margin-bottom: 6px;
+  }
+  .anime-show-tagline {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 1px;
+  }
+
+  .anime-characters-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: var(--brown);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .char-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .char-card {
+    border-radius: 20px;
+    padding: 20px 16px;
+    text-align: center;
+    border: 3px solid rgba(0,0,0,0.12);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+  }
+  .char-card:hover {
+    transform: translateY(-6px) rotate(1deg);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  }
+  .char-emoji { font-size: 3.5rem; display: block; margin-bottom: 8px; }
+  .char-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: #222;
+    margin-bottom: 4px;
+  }
+  .char-role {
+    font-size: 0.82rem;
+    color: #555;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .power-bar-wrap {
+    background: rgba(0,0,0,0.1);
+    border-radius: 20px;
+    height: 10px;
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+  .power-bar {
+    height: 100%;
+    border-radius: 20px;
+    transition: width 1s ease;
+  }
+  .power-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.75rem;
+    color: #666;
+  }
+  .char-move {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.08);
+    color: #333;
+  }
+
+  .facts-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    color: var(--brown);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .fact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .fact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: white;
+    border-radius: 16px;
+    padding: 14px 18px;
+    border: 2px solid rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    transition: transform 0.15s;
+  }
+  .fact-item:hover { transform: translateX(4px); }
+  .fact-num {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    min-width: 36px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .fact-text {
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--brown);
+    line-height: 1.5;
+    padding-top: 2px;
+  }
+
+  /* Per-show colors */
+  .opm-banner { background: linear-gradient(135deg, #e63946, #9b1d20); }
+  .dbz-banner { background: linear-gradient(135deg, #f77f00, #fcbf49); }
+  .nrt-banner { background: linear-gradient(135deg, #f4a261, #e76f51); }
+  .pkm-banner { background: linear-gradient(135deg, #ffd60a, #f4a261); }
+
+  .opm-card { background: #fff0f0; }
+  .dbz-card { background: #fff8e0; }
+  .nrt-card { background: #fff4e0; }
+  .pkm-card { background: #fffde0; }
+
+  .opm-bar  { background: linear-gradient(90deg, #e63946, #ff6b6b); }
+  .dbz-bar  { background: linear-gradient(90deg, #f77f00, #fcbf49); }
+  .nrt-bar  { background: linear-gradient(90deg, #e76f51, #f4a261); }
+  .pkm-bar  { background: linear-gradient(90deg, #ffd60a, #ffec6e); }
+
+  .fact-opm .fact-num { color: #e63946; }
+  .fact-dbz .fact-num { color: #f77f00; }
+  .fact-nrt .fact-num { color: #e76f51; }
+  .fact-pkm .fact-num { color: #c9a000; }
+
   /* ===== SPONGEBOB MEMES ===== */
   .sponge-narrator {
     background: linear-gradient(135deg, #1a1a2e, #16213e);
@@ -1001,6 +1219,7 @@
   <button class="nav-btn nav-gallery" onclick="showSection('gallery', this)">🖼️ My Gallery</button>
   <button class="nav-btn nav-upload" onclick="showSection('upload', this)">📤 Upload</button>
   <button class="nav-btn nav-memes" onclick="showSection('memes', this)">🧽 SpongeBob Memes</button>
+  <button class="nav-btn nav-anime" onclick="showSection('anime', this)">⚡ Anime Zone</button>
 </nav>
 
 <!-- ============ TRIVIA SECTION ============ -->
@@ -1262,6 +1481,230 @@
       <div class="sponge-speech" style="color: var(--banana);">
         "And THAT is the end of today's Meme Zone! I hope you laughed so hard that milk came out of your nose — even if you weren't drinking milk! See you next time, and remember: IMAGINATION!"
         <span>— SpongeBob SquarePants, signing off from Bikini Bottom</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ ANIME ZONE SECTION ============ -->
+<section id="anime" class="section">
+  <div class="section-card">
+    <div class="section-title">⚡ Reece's Anime Zone! ⚡</div>
+
+    <!-- TABS -->
+    <div class="anime-tabs">
+      <button class="anime-tab opm active" onclick="showAnime('opm', this)">👊 One Punch Man</button>
+      <button class="anime-tab dbz" onclick="showAnime('dbz', this)">⚡ Dragon Ball Z</button>
+      <button class="anime-tab nrt" onclick="showAnime('nrt', this)">🍥 Naruto</button>
+      <button class="anime-tab pkm" onclick="showAnime('pkm', this)">⚡ Pokémon</button>
+    </div>
+
+    <!-- ONE PUNCH MAN -->
+    <div class="anime-show opm active" id="show-opm">
+      <div class="anime-hero-banner opm-banner">
+        <span class="anime-big-emoji">👊</span>
+        <div class="anime-show-title">One Punch Man</div>
+        <div class="anime-show-tagline">One punch. That's all it takes.</div>
+      </div>
+      <div class="anime-characters-title">⚡ Characters</div>
+      <div class="char-grid">
+        <div class="char-card opm-card">
+          <span class="char-emoji">🦲</span>
+          <div class="char-name">Saitama</div>
+          <div class="char-role">The One Punch Hero</div>
+          <div class="power-bar-wrap"><div class="power-bar opm-bar" style="width:100%"></div></div>
+          <div class="power-label">Power: ∞ INFINITE</div>
+          <div class="char-move">💥 Serious Punch</div>
+        </div>
+        <div class="char-card opm-card">
+          <span class="char-emoji">🦾</span>
+          <div class="char-name">Genos</div>
+          <div class="char-role">Cyborg Hero / S-Class</div>
+          <div class="power-bar-wrap"><div class="power-bar opm-bar" style="width:78%"></div></div>
+          <div class="power-label">Power: 78%</div>
+          <div class="char-move">🔥 Incineration Cannon</div>
+        </div>
+        <div class="char-card opm-card">
+          <span class="char-emoji">🦟</span>
+          <div class="char-name">Speed-o-Sound Sonic</div>
+          <div class="char-role">Ninja Villain / Rival</div>
+          <div class="power-bar-wrap"><div class="power-bar opm-bar" style="width:55%"></div></div>
+          <div class="power-label">Power: 55%</div>
+          <div class="char-move">💨 Flash & Slash</div>
+        </div>
+        <div class="char-card opm-card">
+          <span class="char-emoji">🦍</span>
+          <div class="char-name">Bang</div>
+          <div class="char-role">Silver Fang / S-Class #3</div>
+          <div class="power-bar-wrap"><div class="power-bar opm-bar" style="width:88%"></div></div>
+          <div class="power-label">Power: 88%</div>
+          <div class="char-move">🌀 Water Stream Rock Smashing</div>
+        </div>
+      </div>
+      <div class="facts-title">🤯 Crazy Fun Facts</div>
+      <div class="fact-list">
+        <div class="fact-item fact-opm"><div class="fact-num">💪</div><div class="fact-text">Saitama trained so hard he lost ALL his hair! His workout was 100 push-ups, 100 sit-ups, 100 squats, and a 10km run — EVERY SINGLE DAY!</div></div>
+        <div class="fact-item fact-opm"><div class="fact-num">😴</div><div class="fact-text">Saitama is so overpowered that he gets BORED fighting villains because he wins in one punch. He's sad nobody can challenge him!</div></div>
+        <div class="fact-item fact-opm"><div class="fact-num">🛒</div><div class="fact-text">Even though he's the strongest hero alive, Saitama loves going to the grocery store for sales and deals. Very relatable!</div></div>
+        <div class="fact-item fact-opm"><div class="fact-num">🏅</div><div class="fact-text">Despite being the most powerful, Saitama started out ranked as a C-Class hero because the Hero Association didn't know how strong he was!</div></div>
+        <div class="fact-item fact-opm"><div class="fact-num">🎮</div><div class="fact-text">Saitama once lost a video game to Genos and cried about it. He can beat any monster but can't beat a video game!</div></div>
+      </div>
+    </div>
+
+    <!-- DRAGON BALL Z -->
+    <div class="anime-show dbz" id="show-dbz">
+      <div class="anime-hero-banner dbz-banner">
+        <span class="anime-big-emoji">⚡</span>
+        <div class="anime-show-title">Dragon Ball Z</div>
+        <div class="anime-show-tagline">It's over 9000!!!</div>
+      </div>
+      <div class="anime-characters-title">⚡ Characters</div>
+      <div class="char-grid">
+        <div class="char-card dbz-card">
+          <span class="char-emoji">🌟</span>
+          <div class="char-name">Goku</div>
+          <div class="char-role">Saiyan Hero / Earth's Protector</div>
+          <div class="power-bar-wrap"><div class="power-bar dbz-bar" style="width:99%"></div></div>
+          <div class="power-label">Power: 99%</div>
+          <div class="char-move">💥 Kamehameha!</div>
+        </div>
+        <div class="char-card dbz-card">
+          <span class="char-emoji">👑</span>
+          <div class="char-name">Vegeta</div>
+          <div class="char-role">Prince of all Saiyans</div>
+          <div class="power-bar-wrap"><div class="power-bar dbz-bar" style="width:95%"></div></div>
+          <div class="power-label">Power: 95%</div>
+          <div class="char-move">💢 Final Flash</div>
+        </div>
+        <div class="char-card dbz-card">
+          <span class="char-emoji">😈</span>
+          <div class="char-name">Frieza</div>
+          <div class="char-role">Galaxy's Biggest Villain</div>
+          <div class="power-bar-wrap"><div class="power-bar dbz-bar" style="width:90%"></div></div>
+          <div class="power-label">Power: 90%</div>
+          <div class="char-move">☄️ Death Ball</div>
+        </div>
+        <div class="char-card dbz-card">
+          <span class="char-emoji">🧒</span>
+          <div class="char-name">Gohan</div>
+          <div class="char-role">Goku's Son / Super Saiyan 2</div>
+          <div class="power-bar-wrap"><div class="power-bar dbz-bar" style="width:92%"></div></div>
+          <div class="power-label">Power: 92%</div>
+          <div class="char-move">⚡ Father-Son Kamehameha</div>
+        </div>
+      </div>
+      <div class="facts-title">🤯 Crazy Fun Facts</div>
+      <div class="fact-list">
+        <div class="fact-item fact-dbz"><div class="fact-num">📊</div><div class="fact-text">"It's over 9000!" is one of the most famous lines in anime history. Vegeta was actually reading Goku's power level with a device called a scouter!</div></div>
+        <div class="fact-item fact-dbz"><div class="fact-num">🥦</div><div class="fact-text">Goku eats INSANE amounts of food — like dozens of bowls of rice at one meal. He needs it to fuel all that training!</div></div>
+        <div class="fact-item fact-dbz"><div class="fact-num">💛</div><div class="fact-text">When a Saiyan goes Super Saiyan, their hair turns golden yellow and sticks straight up. The angrier they get, the more powerful they become!</div></div>
+        <div class="fact-item fact-dbz"><div class="fact-num">👶</div><div class="fact-text">Goku's real Saiyan name is Kakarot. His parents sent him to Earth as a baby — kind of like Superman!</div></div>
+        <div class="fact-item fact-dbz"><div class="fact-num">🌙</div><div class="fact-text">Saiyans have a secret power — if they look at a full moon they transform into giant apes called Oozaru!</div></div>
+      </div>
+    </div>
+
+    <!-- NARUTO -->
+    <div class="anime-show nrt" id="show-nrt">
+      <div class="anime-hero-banner nrt-banner">
+        <span class="anime-big-emoji">🍥</span>
+        <div class="anime-show-title">Naruto</div>
+        <div class="anime-show-tagline">Believe it! — Naruto Uzumaki</div>
+      </div>
+      <div class="anime-characters-title">⚡ Characters</div>
+      <div class="char-grid">
+        <div class="char-card nrt-card">
+          <span class="char-emoji">🍥</span>
+          <div class="char-name">Naruto Uzumaki</div>
+          <div class="char-role">7th Hokage / Nine-Tails host</div>
+          <div class="power-bar-wrap"><div class="power-bar nrt-bar" style="width:97%"></div></div>
+          <div class="power-label">Power: 97%</div>
+          <div class="char-move">🌀 Rasengan!</div>
+        </div>
+        <div class="char-card nrt-card">
+          <span class="char-emoji">⚡</span>
+          <div class="char-name">Sasuke Uchiha</div>
+          <div class="char-role">Naruto's Rival / Sharingan user</div>
+          <div class="power-bar-wrap"><div class="power-bar nrt-bar" style="width:96%"></div></div>
+          <div class="power-label">Power: 96%</div>
+          <div class="char-move">🔥 Chidori</div>
+        </div>
+        <div class="char-card nrt-card">
+          <span class="char-emoji">🌸</span>
+          <div class="char-name">Sakura Haruno</div>
+          <div class="char-role">Medical Ninja / Super Strength</div>
+          <div class="power-bar-wrap"><div class="power-bar nrt-bar" style="width:80%"></div></div>
+          <div class="power-label">Power: 80%</div>
+          <div class="char-move">👊 Cherry Blossom Impact</div>
+        </div>
+        <div class="char-card nrt-card">
+          <span class="char-emoji">🐸</span>
+          <div class="char-name">Kakashi Hatake</div>
+          <div class="char-role">Team 7 Sensei / Copy Ninja</div>
+          <div class="power-bar-wrap"><div class="power-bar nrt-bar" style="width:93%"></div></div>
+          <div class="power-label">Power: 93%</div>
+          <div class="char-move">⚡ Lightning Blade</div>
+        </div>
+      </div>
+      <div class="facts-title">🤯 Crazy Fun Facts</div>
+      <div class="fact-list">
+        <div class="fact-item fact-nrt"><div class="fact-num">🦊</div><div class="fact-text">Naruto has the Nine-Tailed Fox demon sealed inside him! At first it was scary, but later it became his greatest source of power.</div></div>
+        <div class="fact-item fact-nrt"><div class="fact-num">🍜</div><div class="fact-text">Naruto's favorite food is Ichiraku Ramen — he eats it almost every day! The ramen chef is one of his best friends.</div></div>
+        <div class="fact-item fact-nrt"><div class="fact-num">👁️</div><div class="fact-text">The Sharingan is a special eye power only the Uchiha clan has. It can copy any move it sees — Kakashi copied over 1,000 jutsu with it!</div></div>
+        <div class="fact-item fact-nrt"><div class="fact-num">🪄</div><div class="fact-text">Shadow Clone Jutsu creates hundreds of real copies of yourself. Naruto uses it so much he learned things that take most ninjas years to master!</div></div>
+        <div class="fact-item fact-nrt"><div class="fact-num">🏆</div><div class="fact-text">Naruto went from being the kid nobody liked to becoming Hokage — the most respected ninja leader of the whole village. Never give up!</div></div>
+      </div>
+    </div>
+
+    <!-- POKEMON -->
+    <div class="anime-show pkm" id="show-pkm">
+      <div class="anime-hero-banner pkm-banner">
+        <span class="anime-big-emoji">⚡</span>
+        <div class="anime-show-title">Pokémon</div>
+        <div class="anime-show-tagline">Gotta catch 'em all!</div>
+      </div>
+      <div class="anime-characters-title">⚡ Characters</div>
+      <div class="char-grid">
+        <div class="char-card pkm-card">
+          <span class="char-emoji">⚡</span>
+          <div class="char-name">Pikachu</div>
+          <div class="char-role">Ash's Partner / Electric type</div>
+          <div class="power-bar-wrap"><div class="power-bar pkm-bar" style="width:88%"></div></div>
+          <div class="power-label">Power: 88%</div>
+          <div class="char-move">⚡ Thunderbolt!</div>
+        </div>
+        <div class="char-card pkm-card">
+          <span class="char-emoji">🔥</span>
+          <div class="char-name">Charizard</div>
+          <div class="char-role">Fire/Flying type / Fan Favorite</div>
+          <div class="power-bar-wrap"><div class="power-bar pkm-bar" style="width:94%"></div></div>
+          <div class="power-label">Power: 94%</div>
+          <div class="char-move">🔥 Flamethrower</div>
+        </div>
+        <div class="char-card pkm-card">
+          <span class="char-emoji">🌊</span>
+          <div class="char-name">Mewtwo</div>
+          <div class="char-role">Legendary / Psychic type</div>
+          <div class="power-bar-wrap"><div class="power-bar pkm-bar" style="width:99%"></div></div>
+          <div class="power-label">Power: 99%</div>
+          <div class="char-move">🔮 Psystrike</div>
+        </div>
+        <div class="char-card pkm-card">
+          <span class="char-emoji">🐉</span>
+          <div class="char-name">Dragonite</div>
+          <div class="char-role">Dragon/Flying type / Super fast</div>
+          <div class="power-bar-wrap"><div class="power-bar pkm-bar" style="width:91%"></div></div>
+          <div class="power-label">Power: 91%</div>
+          <div class="char-move">🌀 Hyper Beam</div>
+        </div>
+      </div>
+      <div class="facts-title">🤯 Crazy Fun Facts</div>
+      <div class="fact-list">
+        <div class="fact-item fact-pkm"><div class="fact-num">🔢</div><div class="fact-text">There are over 1,000 different Pokémon species now! The very first ones were Bulbasaur, Charmander, Squirtle — and Pikachu!</div></div>
+        <div class="fact-item fact-pkm"><div class="fact-num">😤</div><div class="fact-text">Ash's Pikachu refused to evolve into Raichu even though Raichu is stronger. Pikachu wanted to win battles as itself!</div></div>
+        <div class="fact-item fact-pkm"><div class="fact-num">🏆</div><div class="fact-text">Ash Ketchum finally became World Pokémon Champion after 25 YEARS of trying! The whole internet celebrated when it happened!</div></div>
+        <div class="fact-item fact-pkm"><div class="fact-num">😴</div><div class="fact-text">Snorlax weighs 1,014 pounds and sleeps 18 hours a day. Its dream job is just to eat and sleep — honestly a legend.</div></div>
+        <div class="fact-item fact-pkm"><div class="fact-num">👻</div><div class="fact-text">Gengar is said to be the shadow of a human that got lost trying to find its way back. That's both spooky AND a little sad!</div></div>
       </div>
     </div>
 
@@ -1532,6 +1975,14 @@ function showEndScreen() {
 
 // Start the game
 restartGame();
+
+// ========== ANIME TABS ==========
+function showAnime(id, btn) {
+  document.querySelectorAll('.anime-show').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.anime-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('show-' + id).classList.add('active');
+  btn.classList.add('active');
+}
 
 // ========== GALLERY ==========
 let galleryItems = JSON.parse(localStorage.getItem('reeceGallery') || '[]');

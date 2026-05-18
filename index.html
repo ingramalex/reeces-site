@@ -370,6 +370,166 @@
   .fact-nrt .fact-num { color: #e76f51; }
   .fact-pkm .fact-num { color: #c9a000; }
 
+  /* ===== CARD COLLECTOR ===== */
+  .nav-collector {
+    background: linear-gradient(135deg, #7209b7, #3a0ca3);
+    color: white;
+    box-shadow: 0 5px 0 #4a007a, 0 8px 15px rgba(0,0,0,0.3);
+  }
+  .nav-collector.active, .nav-collector:hover {
+    box-shadow: 0 8px 0 #4a007a, 0 12px 20px rgba(0,0,0,0.3);
+  }
+  .collector-top {
+    display: flex; gap: 20px; margin-bottom: 28px; align-items: flex-start;
+  }
+  @media(max-width:660px){ .collector-top { flex-direction: column; } }
+  .collector-panel {
+    background: #f8f0ff; border-radius: 20px; padding: 20px; border: 2px solid rgba(114,9,183,0.2);
+  }
+  .collector-panel.creator-panel { flex: 1.2; }
+  .collector-panel.summon-panel  { flex: 1; text-align: center; }
+  .collector-panel-title {
+    font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #7209b7;
+    margin-bottom: 14px; text-align: center;
+  }
+  .big-char-card {
+    border-radius: 16px; overflow: hidden; border: 3px solid gold;
+    box-shadow: 0 0 20px rgba(255,215,0,0.5); margin-bottom: 14px;
+    max-width: 190px; margin-left: auto; margin-right: auto;
+  }
+  .big-char-card-header { padding: 12px 8px 6px; text-align: center; }
+  .big-char-face { font-size: 3rem; display: block; }
+  .big-char-class { font-size: 1.5rem; }
+  .big-char-card-body { background: white; padding: 12px; text-align: center; }
+  .big-char-name { font-family:'Fredoka One',cursive; font-size:1.1rem; color:#333; margin:6px 0 2px; }
+  .big-char-sub  { font-size:0.72rem; color:#999; font-weight:700; }
+  .big-char-power{ font-family:'Fredoka One',cursive; font-size:0.9rem; color:#7209b7; margin-top:4px; }
+  .big-char-move { font-size:0.78rem; font-weight:700; color:#555; margin-top:4px; padding:3px 10px;
+    background:#f0e0ff; border-radius:20px; display:inline-block; }
+  .badge-yours { background:linear-gradient(90deg,#ff6b35,#ffd60a); color:#333;
+    font-family:'Fredoka One',cursive; font-size:0.75rem; padding:2px 10px;
+    border-radius:20px; display:inline-block; margin-top:5px; }
+  .creator-label { font-family:'Fredoka One',cursive; font-size:0.95rem; color:#555; margin:10px 0 6px; }
+  .char-text-input {
+    width:100%; font-family:'Nunito',sans-serif; font-size:1rem; font-weight:700;
+    padding:10px 14px; border-radius:12px; border:2px solid #d0a0ff; background:white;
+    color:#333; outline:none; box-sizing:border-box;
+  }
+  .char-text-input:focus { border-color:#7209b7; }
+  .face-grid  { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:4px; }
+  .face-opt {
+    font-size:1.6rem; width:44px; height:44px; border-radius:12px; border:2px solid transparent;
+    background:white; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:all 0.15s;
+  }
+  .face-opt:hover { border-color:#7209b7; transform:scale(1.1); }
+  .face-opt.selected { border-color:#7209b7; background:#f0e0ff; transform:scale(1.1); }
+  .class-grid { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:8px; }
+  .class-opt {
+    font-family:'Fredoka One',cursive; font-size:0.85rem; padding:7px 14px; border-radius:50px;
+    border:2px solid #ccc; background:white; cursor:pointer; display:flex; align-items:center;
+    gap:5px; transition:all 0.15s; color:#333;
+  }
+  .class-opt:hover { border-color:#7209b7; }
+  .class-opt.selected { border-color:#7209b7; background:#f0e0ff; }
+  .save-char-btn {
+    display:block; width:100%; margin-top:12px; font-family:'Fredoka One',cursive; font-size:1.1rem;
+    padding:12px; background:linear-gradient(135deg,#7209b7,#3a0ca3); color:white; border:none;
+    border-radius:50px; cursor:pointer; box-shadow:0 4px 0 #4a007a; transition:all 0.15s;
+    position:relative; top:0;
+  }
+  .save-char-btn:hover { top:-2px; box-shadow:0 6px 0 #4a007a; }
+  .save-char-btn:active { top:2px; box-shadow:0 2px 0 #4a007a; }
+  /* Summon */
+  .summon-card-area {
+    min-height:250px; display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .summon-card-back {
+    width:155px; height:240px; border-radius:16px; background:linear-gradient(135deg,#1a1a2e,#16213e);
+    border:3px solid #7209b7; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:10px; box-shadow:0 4px 20px rgba(114,9,183,0.4);
+  }
+  .scb-icon { font-size:3.5rem; }
+  .scb-text { font-family:'Fredoka One',cursive; color:#d0a0ff; font-size:1rem; }
+  .summon-card-display {
+    width:155px; border-radius:16px; overflow:hidden; border:3px solid #ccc;
+    background:white; box-shadow:0 4px 16px rgba(0,0,0,0.15);
+  }
+  .summon-card-display.common    { border-color:#9e9e9e; }
+  .summon-card-display.rare      { border-color:#1565c0; box-shadow:0 4px 20px rgba(21,101,192,0.4); }
+  .summon-card-display.epic      { border-color:#6a1b9a; box-shadow:0 4px 24px rgba(106,27,154,0.5); }
+  .summon-card-display.legendary { border-color:#f9a825; animation:legend-pulse 1.5s ease-in-out infinite; }
+  @keyframes legend-pulse {
+    0%,100%{ box-shadow:0 0 20px rgba(249,168,37,0.5); }
+    50%    { box-shadow:0 0 45px rgba(249,168,37,0.9); }
+  }
+  .scd-header { padding:10px 6px 4px; text-align:center; }
+  .scd-emoji  { font-size:3rem; display:block; }
+  .scd-name   { font-family:'Fredoka One',cursive; font-size:0.9rem; color:#333; padding:0 6px 2px; text-align:center; }
+  .scd-show   { font-size:0.65rem; color:#777; font-weight:700; text-align:center; padding-bottom:4px; }
+  .scd-move   { font-size:0.7rem; font-weight:700; color:#555; text-align:center; padding:0 6px 6px; }
+  .scd-power  { font-family:'Fredoka One',cursive; font-size:0.8rem; text-align:center; padding:6px; border-top:2px solid rgba(0,0,0,0.08); }
+  @keyframes card-pop {
+    0%  { transform:scale(0.2) rotate(-10deg); opacity:0; }
+    65% { transform:scale(1.08) rotate(2deg); }
+    100%{ transform:scale(1) rotate(0); opacity:1; }
+  }
+  .card-pop { animation:card-pop 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+  .summon-btn {
+    font-family:'Fredoka One',cursive; font-size:1.4rem; padding:16px 40px;
+    background:linear-gradient(135deg,#7209b7,#3a0ca3); color:white; border:none;
+    border-radius:50px; cursor:pointer; box-shadow:0 6px 0 #4a007a,0 8px 20px rgba(114,9,183,0.4);
+    transition:all 0.15s; position:relative; top:0; letter-spacing:1px;
+  }
+  .summon-btn:hover { top:-3px; box-shadow:0 9px 0 #4a007a; }
+  .summon-btn:active { top:3px; box-shadow:0 3px 0 #4a007a; }
+  .summon-btn:disabled { opacity:0.5; cursor:default; top:0; }
+  .summon-info { font-family:'Fredoka One',cursive; color:#888; font-size:0.9rem; margin-top:10px; }
+  .summon-result-msg { font-family:'Fredoka One',cursive; font-size:1rem; min-height:26px; margin-top:6px; }
+  .coll-stats { font-family:'Fredoka One',cursive; font-size:0.9rem; color:#888; margin-top:8px; }
+  /* Collection */
+  .coll-section-title {
+    font-family:'Fredoka One',cursive; font-size:1.5rem; color:var(--brown);
+    text-align:center; margin-bottom:14px;
+  }
+  .coll-filter-row {
+    display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:16px;
+  }
+  .coll-filter-btn {
+    font-family:'Fredoka One',cursive; font-size:0.85rem; padding:6px 16px;
+    border-radius:50px; border:2px solid #ccc; background:white; cursor:pointer; transition:all 0.15s;
+  }
+  .coll-filter-btn.active { background:#7209b7; color:white; border-color:#7209b7; }
+  .coll-grid {
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:12px;
+  }
+  .coll-card {
+    border-radius:14px; overflow:hidden; border:3px solid #ccc; background:white;
+    text-align:center; transition:transform 0.2s; position:relative;
+  }
+  .coll-card:hover { transform:translateY(-5px); }
+  .coll-card.common    { border-color:#9e9e9e; }
+  .coll-card.rare      { border-color:#1565c0; box-shadow:0 2px 12px rgba(21,101,192,0.25); }
+  .coll-card.epic      { border-color:#6a1b9a; box-shadow:0 2px 12px rgba(106,27,154,0.3); }
+  .coll-card.legendary { border-color:#f9a825; box-shadow:0 2px 16px rgba(249,168,37,0.5); }
+  .coll-card-header { padding:8px 4px 4px; }
+  .coll-card-emoji { font-size:2rem; display:block; }
+  .coll-card-name  { font-family:'Fredoka One',cursive; font-size:0.78rem; color:#333; padding:2px 4px; }
+  .coll-card-show  { font-size:0.6rem; color:#888; font-weight:700; padding-bottom:2px; }
+  .coll-card-power { font-family:'Fredoka One',cursive; font-size:0.72rem; padding:4px; border-top:2px solid rgba(0,0,0,0.08); }
+  .rl-common    { color:#757575; }
+  .rl-rare      { color:#1565c0; }
+  .rl-epic      { color:#6a1b9a; }
+  .rl-legendary { color:#e65100; }
+  .new-badge {
+    position:absolute; top:4px; right:4px; background:#e63946; color:white;
+    font-family:'Fredoka One',cursive; font-size:0.6rem; padding:1px 6px; border-radius:20px;
+  }
+  .empty-coll {
+    text-align:center; padding:40px; color:#aaa; font-family:'Fredoka One',cursive;
+    font-size:1.1rem; grid-column:1/-1;
+  }
+
   /* ===== SPONGEBOB MEMES ===== */
   .sponge-narrator {
     background: linear-gradient(135deg, #1a1a2e, #16213e);
@@ -1220,6 +1380,7 @@
   <button class="nav-btn nav-upload" onclick="showSection('upload', this)">📤 Upload</button>
   <button class="nav-btn nav-memes" onclick="showSection('memes', this)">🧽 SpongeBob Memes</button>
   <button class="nav-btn nav-anime" onclick="showSection('anime', this)">⚡ Anime Zone</button>
+  <button class="nav-btn nav-collector" onclick="showSection('collector', this)">🃏 Card Collector</button>
 </nav>
 
 <!-- ============ TRIVIA SECTION ============ -->
@@ -1317,6 +1478,69 @@
         🍌 Add to Gallery!
       </button>
     </div>
+
+  </div>
+</section>
+
+<!-- ============ CARD COLLECTOR SECTION ============ -->
+<section id="collector" class="section">
+  <div class="section-card">
+    <div class="section-title">🃏 Anime Card Collector!</div>
+
+    <div class="collector-top">
+      <!-- YOUR CHARACTER -->
+      <div class="collector-panel creator-panel">
+        <div class="collector-panel-title">⭐ Create Your Hero!</div>
+        <div class="big-char-card" id="myBigCard">
+          <div class="big-char-card-header" id="myCardHeader" style="background:linear-gradient(135deg,#7209b7,#3a0ca3)">
+            <span class="big-char-face" id="myCardFace">🤩</span>
+            <span class="big-char-class" id="myCardClass">🥷</span>
+          </div>
+          <div class="big-char-card-body">
+            <div class="big-char-name" id="myCardName">Your Hero</div>
+            <div class="big-char-sub">⭐ YOUR CHARACTER</div>
+            <div class="big-char-power">⚡ POWER: MAX</div>
+            <div class="big-char-move" id="myCardMove">⚡ Your Move!</div>
+            <div><span class="badge-yours">🌟 HERO</span></div>
+          </div>
+        </div>
+        <div class="creator-label">Hero name:</div>
+        <input class="char-text-input" id="creatorName" placeholder="Enter your name..." maxlength="16" oninput="liveUpdateCard()">
+        <div class="creator-label">Choose your face:</div>
+        <div class="face-grid" id="faceGrid"></div>
+        <div class="creator-label">Choose your class:</div>
+        <div class="class-grid" id="classGrid"></div>
+        <div class="creator-label">Special move name:</div>
+        <input class="char-text-input" id="creatorMove" placeholder="e.g. Ultra Mega Blast!" maxlength="24" oninput="liveUpdateCard()">
+        <button class="save-char-btn" onclick="saveMyChar()">✅ Save My Hero!</button>
+      </div>
+
+      <!-- SUMMON PANEL -->
+      <div class="collector-panel summon-panel">
+        <div class="collector-panel-title">🎰 Summon a Card!</div>
+        <div class="summon-card-area" id="summonCardArea">
+          <div class="summon-card-back">
+            <div class="scb-icon">❓</div>
+            <div class="scb-text">Who will appear?</div>
+          </div>
+        </div>
+        <button class="summon-btn" id="summonBtn" onclick="doSummon()">✨ SUMMON! ✨</button>
+        <div class="summon-info">🎲 Can you pull a Legendary?!</div>
+        <div class="summon-result-msg" id="summonMsg"></div>
+        <div class="coll-stats">📦 Collected: <strong id="collectedCount">0</strong> / <strong>32</strong></div>
+      </div>
+    </div>
+
+    <!-- COLLECTION GRID -->
+    <div class="coll-section-title">🗂️ Your Collection</div>
+    <div class="coll-filter-row">
+      <button class="coll-filter-btn active" onclick="filterColl('all',this)">All</button>
+      <button class="coll-filter-btn" onclick="filterColl('common',this)">⚪ Common</button>
+      <button class="coll-filter-btn" onclick="filterColl('rare',this)">🔵 Rare</button>
+      <button class="coll-filter-btn" onclick="filterColl('epic',this)">🟣 Epic</button>
+      <button class="coll-filter-btn" onclick="filterColl('legendary',this)">🌟 Legendary</button>
+    </div>
+    <div class="coll-grid" id="collGrid"></div>
 
   </div>
 </section>
@@ -1975,6 +2199,180 @@ function showEndScreen() {
 
 // Start the game
 restartGame();
+initCollector();
+
+// ========== CARD COLLECTOR ==========
+const FACES = ['🤩','😎','😤','😊','😏','🧐','😈','🤯'];
+const CLASSES = [
+  { name:'Ninja',   emoji:'🥷', color:'linear-gradient(135deg,#4a007a,#7209b7)' },
+  { name:'Saiyan',  emoji:'💪', color:'linear-gradient(135deg,#c56000,#f77f00)' },
+  { name:'Hero',    emoji:'🦸', color:'linear-gradient(135deg,#0d47a1,#2196f3)' },
+  { name:'Trainer', emoji:'🎮', color:'linear-gradient(135deg,#b09000,#ffd60a)' },
+  { name:'Samurai', emoji:'⚔️', color:'linear-gradient(135deg,#a00,#e63946)'    },
+];
+const ALL_CHARS = [
+  { id:'opm1', name:'Mumen Rider',        show:'One Punch Man', emoji:'🚲', move:'Justice Crash!',               rarity:'common',    color:'#e63946' },
+  { id:'opm2', name:'Mosquito Girl',      show:'One Punch Man', emoji:'🦟', move:'Blood Drain!',                 rarity:'common',    color:'#e63946' },
+  { id:'opm3', name:'Genos',              show:'One Punch Man', emoji:'🦾', move:'Incineration Cannon!',         rarity:'rare',      color:'#e63946' },
+  { id:'opm4', name:'Speed-o-Sound Sonic',show:'One Punch Man', emoji:'💨', move:'Flash & Slash!',              rarity:'rare',      color:'#e63946' },
+  { id:'opm5', name:'Bang',               show:'One Punch Man', emoji:'🥋', move:'Water Stream Rock Smashing!', rarity:'epic',      color:'#e63946' },
+  { id:'opm6', name:'Tatsumaki',          show:'One Punch Man', emoji:'🌪️', move:'Telekinetic Barrage!',        rarity:'epic',      color:'#e63946' },
+  { id:'opm7', name:'Saitama',            show:'One Punch Man', emoji:'🦲', move:'Serious Punch!',              rarity:'legendary', color:'#e63946' },
+  { id:'opm8', name:'Lord Boros',         show:'One Punch Man', emoji:'👁️', move:'Meteor Burst!',              rarity:'legendary', color:'#e63946' },
+  { id:'dbz1', name:'Yamcha',             show:'Dragon Ball Z',  emoji:'⚾', move:'Wolf Fang Fist!',            rarity:'common',    color:'#f77f00' },
+  { id:'dbz2', name:'Krillin',            show:'Dragon Ball Z',  emoji:'🥚', move:'Destructo Disc!',            rarity:'common',    color:'#f77f00' },
+  { id:'dbz3', name:'Piccolo',            show:'Dragon Ball Z',  emoji:'💚', move:'Special Beam Cannon!',       rarity:'rare',      color:'#f77f00' },
+  { id:'dbz4', name:'Trunks',             show:'Dragon Ball Z',  emoji:'⚔️', move:'Burning Attack!',           rarity:'rare',      color:'#f77f00' },
+  { id:'dbz5', name:'Gohan',              show:'Dragon Ball Z',  emoji:'🧒', move:'Father-Son Kamehameha!',     rarity:'epic',      color:'#f77f00' },
+  { id:'dbz6', name:'Vegeta',             show:'Dragon Ball Z',  emoji:'👑', move:'Final Flash!',              rarity:'epic',      color:'#f77f00' },
+  { id:'dbz7', name:'Goku',               show:'Dragon Ball Z',  emoji:'⭐', move:'Kamehameha!',               rarity:'legendary', color:'#f77f00' },
+  { id:'dbz8', name:'Frieza',             show:'Dragon Ball Z',  emoji:'😈', move:'Death Ball!',               rarity:'legendary', color:'#f77f00' },
+  { id:'nrt1', name:'Choji',              show:'Naruto',         emoji:'🍟', move:'Human Boulder!',            rarity:'common',    color:'#e76f51' },
+  { id:'nrt2', name:'Ino',                show:'Naruto',         emoji:'🌸', move:'Mind Transfer!',            rarity:'common',    color:'#e76f51' },
+  { id:'nrt3', name:'Rock Lee',           show:'Naruto',         emoji:'👊', move:'Leaf Whirlwind!',           rarity:'rare',      color:'#e76f51' },
+  { id:'nrt4', name:'Gaara',              show:'Naruto',         emoji:'🏖️', move:'Sand Coffin!',             rarity:'rare',      color:'#e76f51' },
+  { id:'nrt5', name:'Kakashi',            show:'Naruto',         emoji:'🐸', move:'Lightning Blade!',          rarity:'epic',      color:'#e76f51' },
+  { id:'nrt6', name:'Itachi',             show:'Naruto',         emoji:'🪶', move:'Tsukuyomi!',               rarity:'epic',      color:'#e76f51' },
+  { id:'nrt7', name:'Naruto',             show:'Naruto',         emoji:'🍥', move:'Rasengan!',                 rarity:'legendary', color:'#e76f51' },
+  { id:'nrt8', name:'Sasuke',             show:'Naruto',         emoji:'🌩️', move:'Chidori!',                 rarity:'legendary', color:'#e76f51' },
+  { id:'pkm1', name:'Magikarp',           show:'Pokémon',        emoji:'🐟', move:'Splash!',                   rarity:'common',    color:'#c9a000' },
+  { id:'pkm2', name:'Jigglypuff',         show:'Pokémon',        emoji:'🎤', move:'Sing!',                     rarity:'common',    color:'#c9a000' },
+  { id:'pkm3', name:'Gengar',             show:'Pokémon',        emoji:'👻', move:'Shadow Ball!',              rarity:'rare',      color:'#c9a000' },
+  { id:'pkm4', name:'Eevee',              show:'Pokémon',        emoji:'🦊', move:'Quick Attack!',             rarity:'rare',      color:'#c9a000' },
+  { id:'pkm5', name:'Charizard',          show:'Pokémon',        emoji:'🔥', move:'Flamethrower!',             rarity:'epic',      color:'#c9a000' },
+  { id:'pkm6', name:'Lucario',            show:'Pokémon',        emoji:'🐾', move:'Aura Sphere!',              rarity:'epic',      color:'#c9a000' },
+  { id:'pkm7', name:'Mewtwo',             show:'Pokémon',        emoji:'🔮', move:'Psystrike!',                rarity:'legendary', color:'#c9a000' },
+  { id:'pkm8', name:'Pikachu',            show:'Pokémon',        emoji:'🐭', move:'Thunderbolt!',              rarity:'legendary', color:'#c9a000' },
+];
+
+function randPower(rarity) {
+  const r = { common:[100,499], rare:[500,1999], epic:[2000,6999], legendary:[7000,9999] }[rarity];
+  return r[0] + Math.floor(Math.random() * (r[1] - r[0] + 1));
+}
+
+let myChar       = JSON.parse(localStorage.getItem('reeceMyChar')    || 'null') || { name:'', face:'🤩', classIdx:0, move:'' };
+let myCollection = JSON.parse(localStorage.getItem('reeceCollection') || '[]');
+let selFace      = myChar.face    || '🤩';
+let selClassIdx  = myChar.classIdx || 0;
+let collFilter   = 'all';
+let summoning    = false;
+
+function initCollector() {
+  document.getElementById('faceGrid').innerHTML = FACES.map(f =>
+    `<div class="face-opt ${f===selFace?'selected':''}" onclick="selectFace('${f}',this)">${f}</div>`
+  ).join('');
+  document.getElementById('classGrid').innerHTML = CLASSES.map((c,i) =>
+    `<div class="class-opt ${i===selClassIdx?'selected':''}" onclick="selectClass(${i},this)">${c.emoji} ${c.name}</div>`
+  ).join('');
+  if (myChar.name) document.getElementById('creatorName').value = myChar.name;
+  if (myChar.move) document.getElementById('creatorMove').value = myChar.move;
+  updateMyCardDisplay();
+  renderCollection();
+  updateCollCount();
+}
+
+function selectFace(face, el) {
+  selFace = face;
+  document.querySelectorAll('.face-opt').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  updateMyCardDisplay();
+}
+function selectClass(idx, el) {
+  selClassIdx = idx;
+  document.querySelectorAll('.class-opt').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  updateMyCardDisplay();
+}
+function liveUpdateCard() { updateMyCardDisplay(); }
+function updateMyCardDisplay() {
+  const name = document.getElementById('creatorName').value.trim() || 'Your Hero';
+  const move = document.getElementById('creatorMove').value.trim() || 'Super Move!';
+  const cls  = CLASSES[selClassIdx];
+  document.getElementById('myCardFace').textContent   = selFace;
+  document.getElementById('myCardClass').textContent  = cls.emoji;
+  document.getElementById('myCardHeader').style.background = cls.color;
+  document.getElementById('myCardName').textContent   = name;
+  document.getElementById('myCardMove').textContent   = '⚡ ' + move;
+}
+function saveMyChar() {
+  myChar = { name: document.getElementById('creatorName').value.trim() || 'My Hero', face: selFace, classIdx: selClassIdx, move: document.getElementById('creatorMove').value.trim() || 'Super Move!' };
+  localStorage.setItem('reeceMyChar', JSON.stringify(myChar));
+  showToast('🌟 Hero saved! Looking epic!');
+}
+
+function doSummon() {
+  if (summoning) return;
+  summoning = true;
+  const btn = document.getElementById('summonBtn');
+  btn.disabled = true;
+  document.getElementById('summonMsg').textContent = '';
+  document.getElementById('summonCardArea').innerHTML =
+    `<div class="summon-card-back"><div class="scb-icon">✨</div><div class="scb-text">Summoning...</div></div>`;
+
+  setTimeout(() => {
+    const r     = Math.random() * 100;
+    const rarity = r < 5 ? 'legendary' : r < 20 ? 'epic' : r < 50 ? 'rare' : 'common';
+    const pool  = ALL_CHARS.filter(c => c.rarity === rarity);
+    const char  = pool[Math.floor(Math.random() * pool.length)];
+    const power = randPower(rarity);
+    const owned = myCollection.some(c => c.id === char.id);
+    if (!owned) { myCollection.push({...char, power}); localStorage.setItem('reeceCollection', JSON.stringify(myCollection)); }
+
+    const rarityColor = { common:'#757575', rare:'#1565c0', epic:'#6a1b9a', legendary:'#e65100' }[rarity];
+    const rarityLabel = { common:'⚪ Common', rare:'🔵 Rare', epic:'🟣 Epic', legendary:'🌟 LEGENDARY!' }[rarity];
+
+    document.getElementById('summonCardArea').innerHTML = `
+      <div class="summon-card-display ${rarity} card-pop">
+        <div class="scd-header" style="background:${char.color}25">
+          <span class="scd-emoji">${char.emoji}</span>
+        </div>
+        <div class="scd-name">${char.name}</div>
+        <div class="scd-show">${char.show}</div>
+        <div class="scd-move">⚡ ${char.move}</div>
+        <div class="scd-power" style="color:${rarityColor}">${rarityLabel}<br>PWR: ${power.toLocaleString()}</div>
+      </div>`;
+
+    const msg = document.getElementById('summonMsg');
+    if (owned) { msg.textContent = '😅 Already got this one!'; msg.style.color = '#999'; }
+    else if (rarity === 'legendary') { msg.textContent = '🏆 LEGENDARY!! INCREDIBLE PULL!!'; msg.style.color = '#e65100'; }
+    else if (rarity === 'epic')      { msg.textContent = '🟣 Epic card! Great pull!'; msg.style.color = '#6a1b9a'; }
+    else { msg.textContent = '✅ New card added to your collection!'; msg.style.color = '#7209b7'; }
+
+    updateCollCount();
+    renderCollection();
+    summoning = false;
+    setTimeout(() => { btn.disabled = false; }, 900);
+  }, 800);
+}
+
+function updateCollCount() { document.getElementById('collectedCount').textContent = myCollection.length; }
+
+function filterColl(filter, btn) {
+  collFilter = filter;
+  document.querySelectorAll('.coll-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCollection();
+}
+
+function renderCollection() {
+  const grid  = document.getElementById('collGrid');
+  const order = { legendary:0, epic:1, rare:2, common:3 };
+  const cards = (collFilter === 'all' ? myCollection : myCollection.filter(c => c.rarity === collFilter))
+    .slice().sort((a,b) => order[a.rarity] - order[b.rarity]);
+  if (!cards.length) {
+    grid.innerHTML = `<div class="empty-coll">${myCollection.length===0 ? '🎰 Hit SUMMON to start your collection!' : '🔍 No cards in this category yet!'}</div>`;
+    return;
+  }
+  grid.innerHTML = cards.map(c => `
+    <div class="coll-card ${c.rarity}">
+      <div class="coll-card-header" style="background:${c.color}20">
+        <span class="coll-card-emoji">${c.emoji}</span>
+      </div>
+      <div class="coll-card-name">${c.name}</div>
+      <div class="coll-card-show">${c.show}</div>
+      <div class="coll-card-power rl-${c.rarity}">PWR: ${c.power.toLocaleString()}</div>
+    </div>`).join('');
+}
 
 // ========== ANIME TABS ==========
 function showAnime(id, btn) {
